@@ -5,6 +5,37 @@ body, html {
     padding: 0;
 }
 
+.page-0 {
+
+    width: 100%;
+    height: 100%;
+    background-color: #F4F9E2;
+    position: relative;
+
+    .aotuman {
+
+        width: 197px;
+        height: 256px;
+        background-image: url("Man1.png");
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-98px, -128px);
+    }
+
+    .grass2 {
+
+        width: 1136px;
+        height: 130px;
+        background-image: url("Grass3.png");
+        background-repeat: no-repeat;
+        background-size: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+}
+
 .page-2 {
 
     width: 100%;
@@ -14,79 +45,76 @@ body, html {
     background-size: 100%;
     position: relative;
 
-    @at-root {
+    .aotuman {
+        
+        width: 114px;
+        height: 121px;
+        background-image: url("Aotuman.png");
+        position: absolute;
+        left: 18px;
+        top: 139px;
+    }
 
-        .aotuman {
-            
-            width: 114px;
-            height: 121px;
-            background-image: url("Aotuman.png");
+    .topbar {
+
+        .power-slot {
+
+            width: 367px;
+            height: 94px;
+            background-image: url("PowerSlot.png");
             position: absolute;
-            left: 18px;
-            top: 139px;
+            left: 0; top: 0;
         }
 
-        .topbar {
+        .power-fill {
 
-            .power-slot {
-
-                width: 367px;
-                height: 94px;
-                background-image: url("PowerSlot.png");
-                position: absolute;
-                left: 0; top: 0;
-            }
-
-            .power-fill {
-
-                width: 260px;
-                height: 35px;
-                background-image: url("PowerFill.png");
-                transform: scaleX(.5) translateX(-50%);
-                background-size: 100%;
-                position: absolute;
-                left: 98px; top: 30px;
-            }
-
-            .mons-icon {
-
-                width: 54px;
-                height: 53px;
-                background-image: url("MonsterIcon.png");
-                position: absolute;
-                left: 440px; top: 20px;
-            }
-
-            .x {
-
-                width: 40px;
-                height: 41px;
-                background-image: url("x.png");
-                position: absolute;
-                left: 510px; top: 25px;
-            }
-        }
-
-        .mons-stage {
-
-            .mons {
-
-                width: 110px;
-                height: 100px;
-                background-image: url("Monsters.png");
-                position: absolute;
-                left: 510px; top: 205px;
-            }
-        }
-
-        .control {
-
-            width: 800px;
-            height: 98px;
-            background-image: url("Key.png");
+            width: 260px;
+            height: 35px;
+            background-image: url("PowerFill.png");
+            transform: scaleX(.5) translateX(-50%);
+            background-size: 100%;
             position: absolute;
-            left: 0; bottom: 0;
+            left: 98px; top: 30px;
         }
+
+        .mons-icon {
+
+            width: 54px;
+            height: 53px;
+            background-image: url("MonsterIcon.png");
+            position: absolute;
+            left: 440px; top: 20px;
+        }
+
+        .x {
+
+            width: 40px;
+            height: 41px;
+            background-image: url("x.png");
+            position: absolute;
+            left: 510px; top: 25px;
+        }
+    }
+
+    .mons-stage {
+
+        .mons {
+
+            width: 110px;
+            height: 100px;
+            background-image: url("Monsters.png");
+            position: absolute;
+            left: 510px; top: 205px;
+        }
+    }
+
+    .control {
+
+        width: 800px;
+        height: 98px;
+        background-image: url("Key.png");
+        position: absolute;
+        left: 0; bottom: 0;
     }
 
 

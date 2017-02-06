@@ -49,6 +49,7 @@ gulp.task('img', function() {
 gulp.task('js', function() {
 
     return gulp.src('src/js/*.js')
+        .pipe(concat('bundle.js'))
         .pipe(babel({
             presets: ['es2015']
         }))
@@ -111,6 +112,7 @@ gulp.task('img:dev', function() {
 gulp.task('js:dev', function() {
 
     return gulp.src('src/js/*.js')
+        .pipe(concat('bundle.js'))
         .pipe(babel({
             presets: ['es2015']
         }))
