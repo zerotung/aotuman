@@ -12,27 +12,61 @@ body, html {
     background-color: #F4F9E2;
     position: relative;
 
-    .aotuman {
+    $aotuman-width: 197px;
+    $aotuman-height: 256px;
+    $grass1-width: 154px;
+    $grass1-height: 88px;
+    $grass2-width: 1136px;
+    $grass2-height: 120px;
+    $loading-width: 138px;
+    $loading-height: 45px;
 
-        width: 197px;
-        height: 256px;
+    .aotuman {
+        
+        width: #{$aotuman-width};
+        height: #{$aotuman-height};
         background-image: url("Man1.png");
         position: absolute;
         left: 50%;
         top: 50%;
-        transform: translate(-98px, -128px);
+        transform: translate(#{-$aotuman-width/2 + $grass1-width/4}, #{-$aotuman-height/2 - 50px});
+    }
+
+    .grass1 {
+
+        width: #{$grass1-width};
+        height: #{$grass1-height};
+        background-image: url("Grass0.png");
+        background-size: 100%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(#{-$aotuman-width/2 - $grass1-width/4}, #{$aotuman-height/2 - $grass1-height - 50px});
     }
 
     .grass2 {
 
-        width: 1136px;
-        height: 130px;
+        width: #{$grass2-width};
+        height: #{$grass2-height};
         background-image: url("Grass3.png");
         background-repeat: no-repeat;
         background-size: 100%;
         position: absolute;
         bottom: 0;
         left: 0;
+    }
+
+    .loading {
+        
+        width: #{$loading-width};
+        height: #{$loading-height};
+        background-image: url("loading..png");
+        background-repeat: no-repeat;
+        background-size: 100%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(#{-$loading-width/2}, #{-$loading-height/2 + $aotuman-height/2});
     }
 }
 
