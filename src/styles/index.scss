@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
     width: 100%;
     height: 100%;
     margin: 0;
@@ -6,12 +7,10 @@ body, html {
 }
 
 .page-0 {
-
     width: 100%;
     height: 100%;
     background-color: #F4F9E2;
     position: relative;
-
     $aotuman-width: 197px;
     $aotuman-height: 256px;
     $grass1-width: 154px;
@@ -20,20 +19,17 @@ body, html {
     $grass2-height: 120px;
     $loading-width: 138px;
     $loading-height: 45px;
-
     .aotuman {
-        
         width: #{$aotuman-width};
         height: #{$aotuman-height};
         background-image: url("Man1.png");
         position: absolute;
         left: 50%;
         top: 50%;
-        transform: translate(#{-$aotuman-width/2 + $grass1-width/4}, #{-$aotuman-height/2 - 50px});
+        transform: translate(#{-$aotuman-width/2 + $grass1-width/4},
+        #{-$aotuman-height/2 - 50px});
     }
-
     .grass1 {
-
         width: #{$grass1-width};
         height: #{$grass1-height};
         background-image: url("Grass0.png");
@@ -41,11 +37,10 @@ body, html {
         position: absolute;
         left: 50%;
         top: 50%;
-        transform: translate(#{-$aotuman-width/2 - $grass1-width/4}, #{$aotuman-height/2 - $grass1-height - 50px});
+        transform: translate(#{-$aotuman-width/2 - $grass1-width/4},
+        #{$aotuman-height/2 - $grass1-height - 50px});
     }
-
     .grass2 {
-
         width: #{$grass2-width};
         height: #{$grass2-height};
         background-image: url("Grass3.png");
@@ -55,9 +50,7 @@ body, html {
         bottom: 0;
         left: 0;
     }
-
     .loading {
-        
         width: #{$loading-width};
         height: #{$loading-height};
         background-image: url("loading..png");
@@ -66,90 +59,113 @@ body, html {
         position: absolute;
         left: 50%;
         top: 50%;
-        transform: translate(#{-$loading-width/2}, #{-$loading-height/2 + $aotuman-height/2});
+        transform: translate(#{-$loading-width/2},
+        #{-$loading-height/2 + $aotuman-height/2});
+    }
+}
+
+.page-1 {
+    width: 100%;
+    height: 100%;
+    background-color: #F1F6DF;
+    position: relative;
+    $starticon-width: 600px;
+    $starticon-height: 391px;
+    $startbtn-width: 298px;
+    $startbtn-height: 118px;
+    .start-icon {
+        width: #{$starticon-width};
+        height: #{$starticon-height};
+        background-image: url("StartIcon.png");
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(#{-$starticon-width/2},
+        #{-$starticon-height/2 - 70px});
+    }
+    .start-btn {
+        width: #{$startbtn-width};
+        height: #{$startbtn-height};
+        background-image: url("StartBtn.png");
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(#{-$startbtn-width/2},
+        #{-$startbtn-height/2 + $starticon-height/2});
+        &:hover {
+            background: url("StartBtn.png") no-repeat -0px -118px;
+        }
     }
 }
 
 .page-2 {
-
     width: 100%;
     height: 100%;
     background-image: url("game_bg.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
     position: relative;
-
     .aotuman {
-        
-        width: 114px;
-        height: 121px;
-        background-image: url("Aotuman.png");
+        width: 262px;
+        height: 290px;
+        background: url("Aotuman.png") no-repeat -586px -290px;
         position: absolute;
         left: 18px;
         top: 139px;
     }
-
     .topbar {
-
         .power-slot {
-
-            width: 367px;
-            height: 94px;
+            width: 521px;
+            height: 122px;
             background-image: url("PowerSlot.png");
+            // background-position: 0 -122px;
             position: absolute;
-            left: 0; top: 0;
+            left: 0;
+            top: 0;
         }
-
         .power-fill {
-
-            width: 260px;
-            height: 35px;
+            width: 373px;
+            height: 37px;
             background-image: url("PowerFill.png");
-            transform: scaleX(.5) translateX(-50%);
-            background-size: 100%;
+            // background-position: 0 -37px;
+            // transform: scaleX(.5) translateX(-50%);
             position: absolute;
-            left: 98px; top: 30px;
+            left: 131px;
+            top: 32px;
         }
-
         .mons-icon {
-
-            width: 54px;
-            height: 53px;
-            background-image: url("MonsterIcon.png");
+            width: 86px;
+            height: 86px;
+            background-image: url("MonsIcon.png");
             position: absolute;
-            left: 440px; top: 20px;
+            left: 640px;
+            top: 10px;
         }
-
         .x {
-
             width: 40px;
             height: 41px;
             background-image: url("x.png");
             position: absolute;
-            left: 510px; top: 25px;
+            left: 740px;
+            top: 55px;
         }
     }
-
     .mons-stage {
-
         .mons {
-
-            width: 110px;
-            height: 100px;
-            background-image: url("Monsters.png");
+            width: 216px;
+            height: 196px;
+            background: url("Monsters.png") no-repeat -434px -980px;
             position: absolute;
-            left: 510px; top: 205px;
+            left: 510px;
+            top: 205px;
         }
     }
-
     .control {
-
-        width: 800px;
-        height: 98px;
+        width: 1136px;
+        height: 139px;
         background-image: url("Key.png");
         position: absolute;
-        left: 0; bottom: 0;
+        left: 0;
+        bottom: 0;
     }
-
-
 }

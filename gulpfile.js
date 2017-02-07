@@ -42,7 +42,7 @@ gulp.task('sass', function() {
 
 gulp.task('img', function() {
     return gulp.src('src/imgs/*.+(png|jpg)')
-        .pipe(imagemin())
+        // .pipe(imagemin())
         .pipe(gulp.dest('dist/static'))
 })
 
