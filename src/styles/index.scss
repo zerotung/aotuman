@@ -145,7 +145,7 @@ html,
         .x {
             width: 40px;
             height: 41px;
-            background-image: url("x.png");
+            background-image: url("X.png");
             position: absolute;
             left: 740px;
             top: 55px;
@@ -210,5 +210,64 @@ html,
             content: "";
             clear: both;
         }
+    }
+}
+
+.page-3 {
+    width: 100%;
+    height: 100%;
+    background-color: #FEFFEF;
+    position: relative;
+    $grass2-width: 1136px;
+    $grass2-height: 261px;
+    $aotuman-width: 718px;
+    $aotuman-height: 615px;
+    $score-board-width: 565px;
+    $score-board-height: 395px;
+    $restart-width: 271px;
+    $restart-height: 136px;
+    $share-width: 341px;
+    $share-height: 136px;
+    .grass {
+        width: #{$grass2-width};
+        height: #{$grass2-height};
+        background-image: url("Grass2.png");
+        position: absolute;
+        left: 0;
+        bottom: 0;
+    }
+    .aotuman {
+        width: #{$aotuman-width};
+        height: #{$aotuman-height};
+        background-image: url("Man2.png");
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .score-board {
+        width: #{$score-board-width};
+        height: #{$score-board-height};
+        background-image: url("ScoreBoard.png");
+        position: absolute;
+        right: 35px;
+        top: 30px;
+    }
+    .restart {
+        width: #{$restart-width};
+        height: #{$restart-height};
+        background-image: url("Restart.png");
+        background-position: 0 #{$restart-height};
+        position: absolute;
+        left: 140px;
+        bottom: 20px;
+    }
+    .share {
+        width: #{$share-width};
+        height: #{$share-height};
+        background-image: url("Share.png");
+        background-position: 0 #{-$share-height};
+        position: absolute;
+        right: 140px;
+        bottom: 20px;
     }
 }

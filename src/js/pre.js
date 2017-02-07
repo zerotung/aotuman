@@ -39,5 +39,11 @@ preload(
     'static/PowerFill.png',
     'static/PowerSlot.png',
     'static/game_bg.jpg',
-    'static/x.png',
+    'static/X.png',
+    // end page
+    'static/Grass2.png',
+    'static/Man2.png',
+    'static/ScoreBoard.png',
+    'static/Restart.png',
+    'static/Share.png',
 );

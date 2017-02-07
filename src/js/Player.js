@@ -87,8 +87,13 @@ class Player {
         this.interval = setInterval(function() {
             let monster = new Monster();
             monsters.push(monster);
-        }, 2000);
-        let monsterInterval = setInterval(this.renderMonster, 100);
+            if (monsters.length > 3) {
+                clearInterval(this.interval);
+                clearInterval(this.monsterInterval);
+                this.end();
+            }
+        }.bind(this), 2000);
+        this.monsterInterval = setInterval(this.renderMonster, 100);
         // var monster = new Monster();
         // var monsterInterval = setInterval(function() {
         //     document.getElementsByClassName("mons-stage")[0].appendChild(monster.render());
@@ -96,6 +101,7 @@ class Player {
     }
 
     playInit() {
+        monsters = [];
         let stage = document.getElementsByClassName('stage')[0];
         if (stage.getElementsByTagName('div')[0]) {
             stage.removeChild(stage.getElementsByTagName('div')[0]);
@@ -144,6 +150,39 @@ class Player {
 
     end() {
 
+        // <div className="page-3">
+        //     <div className="aotuman"></div>
+        //     <div className="score-board"></div>
+        //     <div className="restart"></div>
+        //     <div className="share"></div>
+        //     <div className="grass"></div>
+        // </div>
+
+        let stage = document.getElementsByClassName('stage')[0];
+        if (stage.getElementsByTagName('div')[0]) {
+            stage.removeChild(stage.getElementsByTagName('div')[0]);
+        }
+        let page = document.createElement('div'),
+            grass = document.createElement('div'),
+            aotuman = document.createElement('div'),
+            scoreBoard = document.createElement('div'),
+            restart = document.createElement('div'),
+            share = document.createElement('div');
+        page.className = 'page-3';
+        grass.className = 'grass';
+        aotuman.className = 'aotuman';
+        scoreBoard.className = 'score-board';
+        restart.className = 'restart';
+        restart.addEventListener('touchend', function() {
+            this.start();
+        }.bind(this));
+        share.className = 'share';
+        page.appendChild(aotuman);
+        page.appendChild(scoreBoard);
+        page.appendChild(grass);
+        page.appendChild(restart);
+        page.appendChild(share);
+        stage.appendChild(page);
     }
 
     renderMonster() {
