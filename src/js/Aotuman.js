@@ -58,20 +58,63 @@ class Aotuman {
                 "background-position": "-0px -293px"
             }
         }
-        this.pic = new Image();
-        this.pic.src = "static/Aotuman.png";
-        this.initWidth = 114;
-        this.initHeight = 121;
-        this.initLeft = 18;
-        this.initTop = 139;
+        this.pic = document.createElement('div');
+        this.left = 18;
+        this.top = 139;
+        this.shooting = false;
         this.init();
     }
 
     init() {
-        this.width = this.initWidth;
-        this.height = this.initHeight;
-        this.left = this.initLeft;
-        this.top = this.initTop;
+        let style = this.pic.style;
+        style.left = this.left + 'px';
+        style.top = this.top + 'px';
+        style.background = "url(\"static/Aotuman.png\") no-repeat " + this.act["1-1"]["background-position"];
+
+
     }
 
+    singleBullet() {
+        let state = 1;
+        let style = this.pic.style;
+        let self = this;
+        this.shooting = true;
+        this.render(2, 1);
+        setTimeout(function() {
+            self.render(2, 2);
+            setTimeout(function() {
+                self.render(2, 3);
+                self.shooting = false;
+                setTimeout(function() {
+                    self.render(1, 1);
+                }, 100);
+            }, 100);
+        }, 100)
+    }
+
+    doubleBullet() {
+        let state = 1;
+        let style = this.pic.style;
+        let self = this;
+        this.shooting = true;
+        this.render(3, 1);
+        setTimeout(function() {
+            self.render(3, 2);
+            setTimeout(function() {
+                self.render(3, 3);
+                self.shooting = false;
+                setTimeout(function() {
+                    self.render(1, 1);
+                }, 100);
+            }, 100);
+        }, 100)
+    }
+
+    render(type = 1, state = 1) {
+        let style = this.pic.style;
+        style.width = this.act[type + '-' + state].width;
+        style.height = this.act[type + '-' + state].height;
+        style.backgroundPosition = this.act[type + '-' + state]["background-position"];
+        return this.pic;
+    }
 }

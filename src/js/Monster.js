@@ -167,8 +167,9 @@ class Monster {
         this.pic = document.createElement('div');
         this.type = Math.ceil(Math.random() * 4);
         this.state = 1;
+        this.stateType = 'walk';
         this.left = 1136;
-        this.top = Math.floor(Math.random() * 150 + 110);
+        this.top = Math.floor(Math.random() * 170 + 90);
         this.init();
     }
 
@@ -181,12 +182,25 @@ class Monster {
         style.height = this.act[state].height + "px";
         style.left = this.left + "px";
         style.top = this.top + "px";
+
+    }
+
+    walk() {
+        this.state = this.state >= 4 ? 1 : this.state + 1;
+    }
+
+    die() {
+        this.state = this.state < 5 ? 5 : this.state + 1;
     }
 
     render() {
         let state = this.type + "-" + this.state;
         let style = this.pic.style;
-        this.state = this.state == 4 ? 1 : this.state + 1;
+        if (this.stateType == 'walk') {
+            this.walk();
+        } else {
+            this.die();
+        }
         this.left -= 10;
         style.backgroundPosition = this.act[state]["background-position"];
         style.width = this.act[state].width + "px";

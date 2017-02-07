@@ -19,19 +19,25 @@ function isPreloadFinished() {
         return img.isLoad;
     });
     if (isAllPreloaded) {
+        player.loading(true);
         console.log("done!");
     } else {
+        player.loading(false);
         console.log("not yet!");
     }
 }
 
 preload(
+    // start page
+    'static/StartIcon.png',
+    'static/StartBtn.png',
+    // game page
     'static/Aotuman.png',
     'static/Key.png',
-    'static/MonsterIcon.png',
+    'static/MonsIcon.png',
     'static/Monsters.png',
     'static/PowerFill.png',
     'static/PowerSlot.png',
     'static/game_bg.jpg',
-    'static/x.png'
+    'static/x.png',
 );
