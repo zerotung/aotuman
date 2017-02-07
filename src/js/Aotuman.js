@@ -1,4 +1,4 @@
-class Aotuman {
+export default class Aotuman {
     // .aotuman {
 
     //     width: 114px;

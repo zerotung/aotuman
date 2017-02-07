@@ -6,6 +6,12 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     imagemin = require('gulp-imagemin'),
     postcss = require('gulp-postcss');
+
+var browserify = require('browserify');
+var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
+var babelify = require("babelify");
+
 var autoprefixer = require('autoprefixer');
 var cssnext = require('cssnext');
 var precss = require('precss');
@@ -48,14 +54,16 @@ gulp.task('img', function() {
 
 gulp.task('js', function() {
 
-    return gulp.src('src/js/*.js')
-        .pipe(concat('bundle.js'))
-        .pipe(babel({
-            presets: ['es2015']
+    return browserify('src/js/app.js')
+        .transform(babelify)
+        .bundle()
+        .pipe(source('bundle.js')) // gives streaming vinyl file object
+        .pipe(buffer()) // <----- convert from streaming to buffered vinyl file object
+        .pipe(uglify()) // now gulp-uglify works 
+        .pipe(gulp.dest('dist/static'))
+        .pipe(reload({
+            stream: true
         }))
-        .pipe(gulp.dest('dist/static'))
-        .pipe(uglify())
-        .pipe(gulp.dest('dist/static'))
 })
 
 gulp.task('build', ['sass', 'html', 'js', 'css', 'img'])
@@ -111,11 +119,11 @@ gulp.task('img:dev', function() {
 
 gulp.task('js:dev', function() {
 
-    return gulp.src('src/js/*.js')
-        .pipe(concat('bundle.js'))
-        .pipe(babel({
-            presets: ['es2015']
-        }))
+    return browserify('src/js/app.js')
+        .transform(babelify)
+        .bundle()
+        .pipe(source('bundle.js')) // gives streaming vinyl file object
+        .pipe(buffer()) // <----- convert from streaming to buffered vinyl file object
         .pipe(gulp.dest('dist/static'))
         .pipe(reload({
             stream: true
