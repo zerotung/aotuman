@@ -4,8 +4,8 @@ import Aotuman from './Aotuman.js';
 export default class Player {
 
     constructor() {
-        this.init(false);
-        this.state = 'loading';
+        this.init();
+        // this.state = 'loading';
         this.interval = null;
         this.monsters = [];
         this.aotu = new Aotuman();
@@ -17,15 +17,24 @@ export default class Player {
             aotuman = document.createElement('div'),
             grass1 = document.createElement('div'),
             grass2 = document.createElement('div'),
-            loading = document.createElement('div');
+            loading = document.createElement('div'),
+            number1 = document.createElement('div'),
+            number2 = document.createElement('div'),
+            percent = document.createElement('div');
         page.className = 'page-0';
         aotuman.className = 'aotuman';
         grass1.className = 'grass1';
         grass2.className = 'grass2';
         loading.className = 'loading';
+        number1.className = 'number1';
+        number2.className = 'number2';
+        percent.className = 'percent';
         page.appendChild(aotuman);
         page.appendChild(grass1);
         page.appendChild(grass2);
+        loading.appendChild(number1);
+        loading.appendChild(number2);
+        loading.appendChild(percent);
         page.appendChild(loading);
         stage.appendChild(page);
     }
@@ -35,15 +44,29 @@ export default class Player {
         //     <div class="aotuman"></div>
         //     <div class="grass1"></div>
         //     <div class="grass2"></div>
-        //     <div class="loading"></div>
+        //     <div class="loading">
+        //         <div class="number"></div>
+        //         <div class="icon"></div>
+        //     </div>
         // </div>
         if (percent == 1) {
             this.start();
             console.log('finished');
         } else {
-            // console.log('Loading');
+
+            this.renderLoading(Math.floor(percent[0] * 100 / percent[1]));
         }
 
+    }
+
+    renderLoading(num) {
+        let number1DOM = document.getElementsByClassName('number1')[0],
+            number2DOM = document.getElementsByClassName('number2')[0],
+            num1 = Math.floor(num / 10),
+            num2 = num % 10;
+        console.log(num1, num2);
+        number1DOM.style.backgroundPosition = -33 * num1 + 'px 0';
+        number2DOM.style.backgroundPosition = -33 * num2 + 'px 0';
     }
 
     start() {
@@ -196,7 +219,6 @@ export default class Player {
         if (monsStage.getElementsByTagName('div')[0]) {
             monsStage.removeChild(monsStage.getElementsByTagName('div')[0]);
         }
-        console.log(this);
         this.monsters.map(function(monster) {
             monsStage.appendChild(monster.render());
         })

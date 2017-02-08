@@ -11,7 +11,8 @@ let player = new Player();
 // 等待加载页的图片加载完后加载其他图片
 window.onload = function() {
     let preload = new Pre(
-        [ // start page
+        [
+            // start page
             'static/StartIcon.png',
             'static/StartBtn.png',
             // game page
@@ -33,7 +34,6 @@ window.onload = function() {
     );
     preload.preload(player.loading.bind(player), player.loading.bind(player));
 }
-
 
 // var monster = new Monster();
 // var monsterInterval = setInterval(function() {

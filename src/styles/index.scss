@@ -34,7 +34,7 @@ html {
         position: absolute;
         left: 50%;
         top: 50%;
-        transform: translate(#{-$aotuman-width/2 + $grass1-width/4},
+        transform: translate(#{-$aotuman-width/2 + 15px},
         #{-$aotuman-height/2 - 50px});
     }
     .grass1 {
@@ -45,7 +45,7 @@ html {
         position: absolute;
         left: 50%;
         top: 50%;
-        transform: translate(#{-$aotuman-width/2 - $grass1-width/4},
+        transform: translate(#{-$aotuman-width/2 + 15px - $grass1-width/2},
         #{$aotuman-height/2 - $grass1-height - 50px});
     }
     .grass2 {
@@ -59,16 +59,29 @@ html {
         left: 0;
     }
     .loading {
-        width: #{$loading-width};
+        width: 100%;
         height: #{$loading-height};
-        background-image: url("loading..png");
-        background-repeat: no-repeat;
-        background-size: 100%;
+        // background-image: url("loading..png");
+        // background-repeat: no-repeat;
+        // background-size: 100%;
         position: absolute;
-        left: 50%;
         top: 50%;
-        transform: translate(#{-$loading-width/2},
-        #{-$loading-height/2 + $aotuman-height/2});
+        text-align: center;
+        transform: translate(0,#{-$loading-height/2 + $aotuman-height/2});
+
+        .number1, .number2 {
+            width: 33px;
+            height: 35px;
+            display: inline-block;
+            background-image: url("NumLoading.png")
+        }
+
+        .percent {
+            width: 45px;
+            height: 39px;
+            background: url('loading.png');
+            display: inline-block;
+        }
     }
 }
 

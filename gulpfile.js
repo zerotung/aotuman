@@ -5,6 +5,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     imagemin = require('gulp-imagemin'),
+    pngquant = require('imagemin-pngquant'),
     postcss = require('gulp-postcss');
 
 var browserify = require('browserify');
@@ -47,8 +48,12 @@ gulp.task('sass', function() {
 })
 
 gulp.task('img', function() {
-    return gulp.src('src/imgs/*.+(png|jpg)')
-        // .pipe(imagemin())
+    return gulp.src('src/imgs/*.*')
+        .pipe(imagemin({
+            optimizationLevel: 7,
+            progressive: true,
+            use: [pngquant()] //使用pngquant来压缩png图片
+        }))
         .pipe(gulp.dest('dist/static'))
 })
 
