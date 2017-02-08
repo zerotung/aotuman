@@ -1,8 +1,12 @@
-import Aotuman from './Aotuman.js';
-import Monster from './Monster.js';
+// import Aotuman from './Aotuman.js';
+// import Monster from './Monster.js';
 import Player from './Player.js';
 import Pre from './Pre.js';
 
+let player = new Player();
+
+// let aotu = new Aotulman();
+// let monsters = [];
 
 // 等待加载页的图片加载完后加载其他图片
 window.onload = function() {
@@ -27,11 +31,8 @@ window.onload = function() {
             'static/Share.png',
         ]
     );
-    preload.preload();
+    preload.preload(player.loading.bind(player), player.loading.bind(player));
 }
-let player = new Player();
-let aotu = new Aotuman();
-let monsters = [];
 
 
 // var monster = new Monster();

@@ -1,9 +1,14 @@
+import Monster from './Monster.js';
+import Aotuman from './Aotuman.js';
+
 export default class Player {
 
     constructor() {
         this.init(false);
         this.state = 'loading';
         this.interval = null;
+        this.monsters = [];
+        this.aotu = new Aotuman();
     }
 
     init() {
@@ -25,18 +30,18 @@ export default class Player {
         stage.appendChild(page);
     }
 
-    loading(isFinished) {
+    loading(percent = 1) {
         // <div class="page-0" style="display: none;">
         //     <div class="aotuman"></div>
         //     <div class="grass1"></div>
         //     <div class="grass2"></div>
         //     <div class="loading"></div>
         // </div>
-        if (isFinished) {
+        if (percent == 1) {
             this.start();
             console.log('finished');
         } else {
-            console.log('Loading');
+            // console.log('Loading');
         }
 
     }
@@ -46,6 +51,7 @@ export default class Player {
         //     <div class="start-icon"></div>
         //     <div class="start-btn"></div>
         // </div>
+
         let stage = document.getElementsByClassName('stage')[0];
         if (stage.getElementsByTagName('div')[0]) {
             stage.removeChild(stage.getElementsByTagName('div')[0]);
@@ -86,14 +92,14 @@ export default class Player {
 
         this.interval = setInterval(function() {
             let monster = new Monster();
-            monsters.push(monster);
-            if (monsters.length > 3) {
+            this.monsters.push(monster);
+            if (this.monsters.length > 3) {
                 clearInterval(this.interval);
                 clearInterval(this.monsterInterval);
                 this.end();
             }
         }.bind(this), 2000);
-        this.monsterInterval = setInterval(this.renderMonster, 100);
+        this.monsterInterval = setInterval(this.renderMonster.bind(this), 100);
         // var monster = new Monster();
         // var monsterInterval = setInterval(function() {
         //     document.getElementsByClassName("mons-stage")[0].appendChild(monster.render());
@@ -101,7 +107,7 @@ export default class Player {
     }
 
     playInit() {
-        monsters = [];
+        this.monsters = [];
         let stage = document.getElementsByClassName('stage')[0];
         if (stage.getElementsByTagName('div')[0]) {
             stage.removeChild(stage.getElementsByTagName('div')[0]);
@@ -132,7 +138,7 @@ export default class Player {
         control2.className = "control-2";
         control3.className = "control-3";
         control4.className = "control-4";
-        aotuman.appendChild(aotu.render());
+        aotuman.appendChild(this.aotu.render());
         page.appendChild(aotuman);
         topbar.appendChild(powerSlot);
         topbar.appendChild(powerFill);
@@ -190,7 +196,8 @@ export default class Player {
         if (monsStage.getElementsByTagName('div')[0]) {
             monsStage.removeChild(monsStage.getElementsByTagName('div')[0]);
         }
-        monsters.map(function(monster) {
+        console.log(this);
+        this.monsters.map(function(monster) {
             monsStage.appendChild(monster.render());
         })
     }
