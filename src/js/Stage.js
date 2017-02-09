@@ -1,5 +1,6 @@
 import Monster from './Monster.js';
 import Aotuman from './Aotuman.js';
+import Bullet from './Bullet.js';
 
 export default class Stage {
 
@@ -115,13 +116,18 @@ export default class Stage {
         this.interval = setInterval(function() {
             let monster = new Monster();
             this.monsters.push(monster);
-            if (this.monsters.length > 3) {
+
+        }.bind(this), 2000);
+        this.monsterInterval = setInterval(function() {
+            this.renderMonster();
+            if (this.monsters.some(function(monster) {
+                    return monster.left < 310;
+                })) {
                 clearInterval(this.interval);
                 clearInterval(this.monsterInterval);
-                this.end();
+                // this.end();
             }
-        }.bind(this), 2000);
-        this.monsterInterval = setInterval(this.renderMonster.bind(this), 100);
+        }.bind(this), 100);
         // var monster = new Monster();
         // var monsterInterval = setInterval(function() {
         //     document.getElementsByClassName("mons-stage")[0].appendChild(monster.render());
@@ -161,16 +167,28 @@ export default class Stage {
         control3.className = "key control-3";
         control4.className = "key control-4";
         control1.addEventListener('touchend', function() {
-            this.killMonster(1);
+            if (!(this.aotu.shooting)) {
+                this.aotu.singleBullet();
+                this.killMonster(1);
+            }
         }.bind(this));
         control2.addEventListener('touchend', function() {
-            this.killMonster(2);
+            if (!(this.aotu.shooting)) {
+                this.aotu.singleBullet();
+                this.killMonster(2);
+            }
         }.bind(this));
         control3.addEventListener('touchend', function() {
-            this.killMonster(3);
+            if (!(this.aotu.shooting)) {
+                this.aotu.singleBullet();
+                this.killMonster(3);
+            }
         }.bind(this));
         control4.addEventListener('touchend', function() {
-            this.killMonster(4);
+            if (!(this.aotu.shooting)) {
+                this.aotu.singleBullet();
+                this.killMonster(4);
+            }
         }.bind(this));
         aotuman.appendChild(this.aotu.render());
         page.appendChild(aotuman);
@@ -225,6 +243,18 @@ export default class Stage {
         stage.appendChild(page);
     }
 
+    renderBullet(position) {
+        console.log(position);
+        let bullet = new Bullet(position);
+        let monsStage = document.getElementsByClassName("mons-stage")[0];
+        let bulletDOM = bullet.render();
+        monsStage.appendChild(bulletDOM);
+        setTimeout(bullet.trans.bind(bullet), 0);
+        setTimeout(function() {
+            monsStage.removeChild(bulletDOM);
+        }, 110);
+    }
+
     renderMonster() {
         let monsStage = document.getElementsByClassName("mons-stage")[0];
         if (monsStage.getElementsByTagName('div')[0]) {
@@ -239,10 +269,12 @@ export default class Stage {
     }
 
     killMonster(num) {
-        console.log('going to kill ' + num);
+        let flag = false; // 是否有怪兽被击倒
         for (let i = 0; i < this.monsters.length; i++) {
             if (this.monsters[i].stateType == 'walk' && this.monsters[i].type == num) {
                 this.monsters[i].die();
+                this.renderBullet([this.monsters[i].left, this.monsters[i].top])
+                flag = true;
                 break;
             }
         }

@@ -180,6 +180,11 @@ html {
             left: 510px;
             top: 205px;
         }
+
+        .bullet {
+            z-index: 1000;
+            transition: transform .1s linear;
+        }
     }
     .control {
         width: 1136px;

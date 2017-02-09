@@ -181,6 +181,7 @@ export default class Monster {
         style.width = this.act[state].width + "px";
         style.height = this.act[state].height + "px";
         style.left = this.left + "px";
+        style.zIndex = this.top;
         style.top = this.top + "px";
 
     }

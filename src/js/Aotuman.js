@@ -87,9 +87,9 @@ export default class Aotuman {
                 self.shooting = false;
                 setTimeout(function() {
                     self.render(1, 1);
-                }, 100);
-            }, 100);
-        }, 100)
+                }, 50);
+            }, 50);
+        }, 50)
     }
 
     doubleBullet() {
