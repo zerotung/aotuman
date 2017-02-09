@@ -1,9 +1,9 @@
 // import Aotuman from './Aotuman.js';
 // import Monster from './Monster.js';
-import Player from './Player.js';
+import Stage from './Stage.js';
 import Pre from './Pre.js';
 
-let player = new Player();
+let stage = new Stage();
 
 // let aotu = new Aotulman();
 // let monsters = [];
@@ -32,7 +32,7 @@ window.onload = function() {
             'static/Share.png',
         ]
     );
-    preload.preload(player.loading.bind(player), player.loading.bind(player));
+    preload.preload(stage.loading.bind(stage), stage.loading.bind(stage));
 }
 
 // var monster = new Monster();

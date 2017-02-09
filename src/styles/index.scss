@@ -190,38 +190,32 @@ html {
         bottom: 0;
         $controlwidth: 284px;
         $controlheight: 139px;
-        .control-1 {
+        .key {
             width: #{$controlwidth};
             height: #{$controlheight};
             float: left;
-            background: url("Key.png") no-repeat 0 0;
+            background: url("Key.png");
+        }
+        .control-1 {
+            background-position: 0 0;
             &:hover {
                 background-position: 0 #{-$controlheight};
             }
         }
         .control-2 {
-            width: 284px;
-            height: 139px;
-            float: left;
-            background: url("Key.png") no-repeat #{-$controlwidth} 0;
+            background-position: #{-$controlwidth} 0;
             &:hover {
                 background-position: #{-$controlwidth} #{-$controlheight};
             }
         }
         .control-3 {
-            width: 284px;
-            height: 139px;
-            float: left;
-            background: url("Key.png") no-repeat #{-$controlwidth*2} 0;
+            background-position: #{-$controlwidth*2} 0;
             &:hover {
                 background-position: #{-$controlwidth*2} #{-$controlheight};
             }
         }
         .control-4 {
-            width: 284px;
-            height: 139px;
-            float: left;
-            background: url("Key.png") no-repeat #{-$controlwidth*3} 0;
+            background-position: #{-$controlwidth*3} 0;
             &:hover {
                 background-position: #{-$controlwidth*3} #{-$controlheight};
             }

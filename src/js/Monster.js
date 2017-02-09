@@ -190,7 +190,15 @@ export default class Monster {
     }
 
     die() {
+        this.stateType = 'die';
         this.state = this.state < 5 ? 5 : this.state + 1;
+        if (this.state == 8) {
+            this.died();
+        }
+    }
+
+    died() {
+        this.stateType = 'died';
     }
 
     render() {
@@ -198,8 +206,10 @@ export default class Monster {
         let style = this.pic.style;
         if (this.stateType == 'walk') {
             this.walk();
-        } else {
+        } else if (this.stateType == 'die') {
             this.die();
+        } else {
+
         }
         this.left -= 10;
         style.backgroundPosition = this.act[state]["background-position"];
