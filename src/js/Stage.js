@@ -1,6 +1,8 @@
 import Monster from './Monster.js';
 import Aotuman from './Aotuman.js';
 import Bullet from './Bullet.js';
+import Level from './Level.js';
+// import Level from './Level.js';
 
 export default class Stage {
 
@@ -11,6 +13,9 @@ export default class Stage {
         this.monsters = [];
         this.aotu = new Aotuman();
         this.score = 0;
+        this.level = 0;
+        this.startTime = 0;
+        this.levelObj = new Level();
     }
 
     init() {
@@ -114,12 +119,20 @@ export default class Stage {
         //     </div>
         // </div>
         this.playInit();
+        this.playStart();
+        // this.interval = setInterval(function() {
+        // let monster = new Monster();
+        // this.monsters.push(monster);
+        // document.getElementsByClassName('mons-stage')[0].appendChild(monster.render());
+        // }.bind(this), 50);
+        // 
 
-        this.interval = setInterval(function() {
-            let monster = new Monster();
-            this.monsters.push(monster);
-            document.getElementsByClassName('mons-stage')[0].appendChild(monster.render());
-        }.bind(this), 2000);
+    }
+
+    playStart() {
+        this.level += 1;
+        this.levelObj.play(this.level, this.appendMonster.bind(this));
+
         this.monsterInterval = setInterval(function() {
             this.renderMonster();
             if (this.monsters.some(function(monster) {
@@ -129,7 +142,7 @@ export default class Stage {
                 clearInterval(this.monsterInterval);
                 this.end();
             }
-        }.bind(this), 100);
+        }.bind(this), 600 / (this.level + 5));
     }
 
     playInit() {
@@ -207,6 +220,19 @@ export default class Stage {
         stage.appendChild(page);
         this.score = 0;
         this.renderGameScore(this.score);
+        // this.startT = new Date().getTime();
+        // console.log(this.startT);
+    }
+
+    appendMonster() {
+        let monsStage = document.getElementsByClassName('mons-stage')[0];
+        if (monsStage) {
+            let monster = new Monster();
+            this.monsters.push(monster);
+            document.getElementsByClassName('mons-stage')[0].appendChild(monster.render());
+            return true;
+        }
+        return false;
     }
 
     renderGameScore(num) {
@@ -220,11 +246,9 @@ export default class Stage {
             num = Math.floor(num / 10);
         } while (num / 10 != 0);
         numArray.reverse().unshift('x');
-        console.log(numArray);
         numArray.forEach(function(number) {
             let num = document.createElement('div');
             num.className = 'NumGameScore-' + number;
-            // console.log(num);
             scoreDOM.appendChild(num);
         })
     }
@@ -313,6 +337,11 @@ export default class Stage {
             }
             return !(monster.stateType == 'died');
         })
+        if (this.monsters.length == 0 && this.levelObj.levelClear == true) {
+            clearInterval(this.monsterInterval);
+            console.log('level: ' + (this.level + 1));
+            setTimeout(this.playStart.bind(this), 3000);
+        }
     }
 
     killMonster(num) {

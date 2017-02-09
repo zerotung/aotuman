@@ -193,7 +193,7 @@ export default class Monster {
     die() {
         this.stateType = 'die';
         this.state = this.state < 5 ? 5 : this.state + 1;
-        if (this.state == 8) {
+        if (this.state > 8) {
             this.died();
         }
     }
@@ -211,7 +211,7 @@ export default class Monster {
         } else if (this.stateType == 'die') {
             this.die();
         } else {
-
+            return;
         }
         this.left -= 10;
         style.backgroundPosition = this.act[state]["background-position"];
