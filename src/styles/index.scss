@@ -67,15 +67,15 @@ html {
         position: absolute;
         top: 50%;
         text-align: center;
-        transform: translate(0,#{-$loading-height/2 + $aotuman-height/2});
-
-        .number1, .number2 {
+        transform: translate(0,
+        #{-$loading-height/2 + $aotuman-height/2});
+        .number1,
+        .number2 {
             width: 33px;
             height: 35px;
             display: inline-block;
             background-image: url("NumLoading.png")
         }
-
         .percent {
             width: 45px;
             height: 39px;
@@ -162,13 +162,88 @@ html {
             left: 640px;
             top: 10px;
         }
-        .x {
-            width: 40px;
-            height: 41px;
-            background-image: url("X.png");
+        .score {
+            height: 70px;
+            line-height: 70px;
+            left: 750px;
+            top: 40px;
             position: absolute;
-            left: 740px;
-            top: 55px;
+            .NumGameScore-x {
+                display: inline-block;
+                width: 40px;
+                height: 41px;
+                background: url("NumGameScore.png") no-repeat -0px -51px;
+            }
+            .NumGameScore-1 {
+                top: 0px;
+                display: inline-block;
+                width: 36px;
+                height: 51px;
+                background: url("NumGameScore.png") no-repeat -116px -51px;
+            }
+            .NumGameScore-2 {
+                top: 0px;
+                display: inline-block;
+                width: 37px;
+                height: 51px;
+                background: url("NumGameScore.png") no-repeat -79px -0px;
+            }
+            .NumGameScore-3 {
+                top: 0px;
+                display: inline-block;
+                width: 36px;
+                height: 51px;
+                background: url("NumGameScore.png") no-repeat -116px -0px;
+            }
+            .NumGameScore-4 {
+                top: 0px;
+                display: inline-block;
+                width: 41px;
+                height: 51px;
+                background: url("NumGameScore.png") no-repeat -0px -0px;
+            }
+            .NumGameScore-5 {
+                top: 0px;
+                display: inline-block;
+                width: 35px;
+                height: 51px;
+                background: url("NumGameScore.png") no-repeat -116px -102px;
+            }
+            .NumGameScore-6 {
+                top: 0px;
+                display: inline-block;
+                width: 38px;
+                height: 51px;
+                background: url("NumGameScore.png") no-repeat -78px -102px;
+            }
+            .NumGameScore-7 {
+                top: 0px;
+                display: inline-block;
+                width: 38px;
+                height: 51px;
+                background: url("NumGameScore.png") no-repeat -41px -0px;
+            }
+            .NumGameScore-8 {
+                top: 0px;
+                display: inline-block;
+                width: 38px;
+                height: 51px;
+                background: url("NumGameScore.png") no-repeat -78px -51px;
+            }
+            .NumGameScore-9 {
+                top: 0px;
+                display: inline-block;
+                width: 39px;
+                height: 51px;
+                background: url("NumGameScore.png") no-repeat -39px -92px;
+            }
+            .NumGameScore-0 {
+                top: 0px;
+                display: inline-block;
+                width: 39px;
+                height: 51px;
+                background: url("NumGameScore.png") no-repeat -0px -92px;
+            }
         }
     }
     .mons-stage {
@@ -180,7 +255,6 @@ html {
             left: 510px;
             top: 205px;
         }
-
         .bullet {
             background-image: url("Bullet.png");
             width: 148px;
@@ -273,6 +347,52 @@ html {
         position: absolute;
         right: 35px;
         top: 30px;
+        .score {
+            position: absolute;
+            width: 980px;
+            height: 100px;
+            line-height: 100px;
+            top: 220px;
+            right: 110px;
+            text-align: right;
+            $numscore-width: 93px;
+            .NumScore {
+                display: inline-block;
+                width: #{$numscore-width};
+                height: 99px;
+                background: url("NumScore.png")
+            }
+            .NumScore-0 {
+                background-position: 0px 0px;
+            }
+            .NumScore-1 {
+                background-position: #{-$numscore-width} 0px;
+            }
+            .NumScore-2 {
+                background-position: #{-$numscore-width*2} 0px;
+            }
+            .NumScore-3 {
+                background-position: #{-$numscore-width*3} 0px;
+            }
+            .NumScore-4 {
+                background-position: #{-$numscore-width*4} 0px;
+            }
+            .NumScore-5 {
+                background-position: #{-$numscore-width*5} 0px;
+            }
+            .NumScore-6 {
+                background-position: #{-$numscore-width*6} 0px;
+            }
+            .NumScore-7 {
+                background-position: #{-$numscore-width*7} 0px;
+            }
+            .NumScore-8 {
+                background-position: #{-$numscore-width*8} 0px;
+            }
+            .NumScore-9 {
+                background-position: #{-$numscore-width*9} 0px;
+            }
+        }
     }
     .restart {
         width: #{$restart-width};

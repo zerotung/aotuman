@@ -10,6 +10,7 @@ export default class Stage {
         this.interval = null;
         this.monsters = [];
         this.aotu = new Aotuman();
+        this.score = 0;
     }
 
     init() {
@@ -52,6 +53,7 @@ export default class Stage {
         // </div>
         if (percent == 1) {
             this.start();
+
             console.log('finished');
         } else {
 
@@ -128,10 +130,6 @@ export default class Stage {
                 this.end();
             }
         }.bind(this), 100);
-        // var monster = new Monster();
-        // var monsterInterval = setInterval(function() {
-        //     document.getElementsByClassName("mons-stage")[0].appendChild(monster.render());
-        // }, 100);
     }
 
     playInit() {
@@ -146,7 +144,8 @@ export default class Stage {
             powerSlot = document.createElement('div'),
             powerFill = document.createElement('div'),
             monsIcon = document.createElement('div'),
-            x = document.createElement('div'),
+            score = document.createElement('div'),
+            lvl = document.createElement('div'),
             monsStage = document.createElement('div'),
             control = document.createElement('div'),
             control1 = document.createElement('div'),
@@ -159,7 +158,8 @@ export default class Stage {
         powerSlot.className = "power-slot";
         powerFill.className = "power-fill";
         monsIcon.className = "mons-icon";
-        x.className = "x";
+        score.className = "score";
+        lvl.className = "lvl";
         monsStage.className = "mons-stage";
         control.className = "control";
         control1.className = "key control-1";
@@ -195,7 +195,8 @@ export default class Stage {
         topbar.appendChild(powerSlot);
         topbar.appendChild(powerFill);
         topbar.appendChild(monsIcon);
-        topbar.appendChild(x);
+        topbar.appendChild(score);
+        topbar.appendChild(lvl);
         page.appendChild(topbar);
         page.appendChild(monsStage);
         control.appendChild(control1);
@@ -204,6 +205,48 @@ export default class Stage {
         control.appendChild(control4);
         page.appendChild(control);
         stage.appendChild(page);
+        this.score = 0;
+        this.renderGameScore(this.score);
+    }
+
+    renderGameScore(num) {
+        let numArray = [];
+        let scoreDOM = document.getElementsByClassName('score')[0];
+        while (scoreDOM.hasChildNodes()) {
+            scoreDOM.removeChild(scoreDOM.lastChild);
+        }
+        do {
+            numArray.push(num % 10);
+            num = Math.floor(num / 10);
+        } while (num / 10 != 0);
+        numArray.reverse().unshift('x');
+        console.log(numArray);
+        numArray.forEach(function(number) {
+            let num = document.createElement('div');
+            num.className = 'NumGameScore-' + number;
+            // console.log(num);
+            scoreDOM.appendChild(num);
+        })
+    }
+
+    renderScore(num) {
+        let numArray = [];
+        let scoreDOM = document.getElementsByClassName('score')[0];
+        while (scoreDOM.hasChildNodes()) {
+            scoreDOM.removeChild(scoreDOM.lastChild);
+        }
+        do {
+            numArray.push(num % 10);
+            num = Math.floor(num / 10);
+        } while (num / 10 != 0);
+        numArray.reverse();
+        console.log(numArray);
+        numArray.forEach(function(number) {
+            let num = document.createElement('div');
+            num.className = 'NumScore NumScore-' + number;
+            // console.log(num);
+            scoreDOM.appendChild(num);
+        })
     }
 
     end() {
@@ -224,23 +267,27 @@ export default class Stage {
             grass = document.createElement('div'),
             aotuman = document.createElement('div'),
             scoreBoard = document.createElement('div'),
+            score = document.createElement('div'),
             restart = document.createElement('div'),
             share = document.createElement('div');
         page.className = 'page-3';
         grass.className = 'grass';
         aotuman.className = 'aotuman';
         scoreBoard.className = 'score-board';
+        score.className = 'score';
         restart.className = 'restart';
         restart.addEventListener('touchend', function() {
             this.start();
         }.bind(this));
         share.className = 'share';
         page.appendChild(aotuman);
+        scoreBoard.appendChild(score);
         page.appendChild(scoreBoard);
         page.appendChild(grass);
         page.appendChild(restart);
         page.appendChild(share);
         stage.appendChild(page);
+        this.renderScore(this.score);
     }
 
     renderBullet(position) {
@@ -248,7 +295,7 @@ export default class Stage {
         let monsStage = document.getElementsByClassName("mons-stage")[0];
         let bulletDOM = bullet.render();
         monsStage.appendChild(bulletDOM);
-        setTimeout(bullet.trans.bind(bullet), 30);
+        setTimeout(bullet.trans.bind(bullet), 0);
         setTimeout(function() {
             monsStage.removeChild(bulletDOM);
         }, 110);
@@ -256,11 +303,7 @@ export default class Stage {
 
     renderMonster() {
         let monsStage = document.getElementsByClassName("mons-stage")[0];
-        // if (monsStage.getElementsByTagName('div')[0]) {
-        //     monsStage.removeChild(monsStage.getElementsByTagName('div')[0]);
-        // }
         this.monsters.forEach(function(monster) {
-            // monsStage.appendChild(monster.render());
             monster.next();
         })
         this.monsters = this.monsters.filter(function(monster) {
@@ -277,6 +320,8 @@ export default class Stage {
         for (let i = 0; i < this.monsters.length; i++) {
             if (this.monsters[i].stateType == 'walk' && this.monsters[i].type == num) {
                 this.monsters[i].die();
+                this.score += 1;
+                this.renderGameScore(this.score);
                 this.renderBullet([this.monsters[i].left, this.monsters[i].top])
                 flag = true;
                 break;
