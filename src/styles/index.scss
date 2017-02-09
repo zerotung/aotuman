@@ -182,6 +182,9 @@ html {
         }
 
         .bullet {
+            background-image: url("Bullet.png");
+            width: 148px;
+            height: 47px;
             z-index: 1000;
             transition: transform .1s linear;
         }

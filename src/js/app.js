@@ -24,6 +24,7 @@ window.onload = function() {
             'static/PowerSlot.png',
             'static/game_bg.jpg',
             'static/X.png',
+            'static/Bullet.png',
             // end page
             'static/Grass2.png',
             'static/Man2.png',

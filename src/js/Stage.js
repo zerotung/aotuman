@@ -116,7 +116,7 @@ export default class Stage {
         this.interval = setInterval(function() {
             let monster = new Monster();
             this.monsters.push(monster);
-
+            document.getElementsByClassName('mons-stage')[0].appendChild(monster.render());
         }.bind(this), 2000);
         this.monsterInterval = setInterval(function() {
             this.renderMonster();
@@ -125,7 +125,7 @@ export default class Stage {
                 })) {
                 clearInterval(this.interval);
                 clearInterval(this.monsterInterval);
-                // this.end();
+                this.end();
             }
         }.bind(this), 100);
         // var monster = new Monster();
@@ -244,12 +244,11 @@ export default class Stage {
     }
 
     renderBullet(position) {
-        console.log(position);
         let bullet = new Bullet(position);
         let monsStage = document.getElementsByClassName("mons-stage")[0];
         let bulletDOM = bullet.render();
         monsStage.appendChild(bulletDOM);
-        setTimeout(bullet.trans.bind(bullet), 0);
+        setTimeout(bullet.trans.bind(bullet), 30);
         setTimeout(function() {
             monsStage.removeChild(bulletDOM);
         }, 110);
@@ -257,13 +256,18 @@ export default class Stage {
 
     renderMonster() {
         let monsStage = document.getElementsByClassName("mons-stage")[0];
-        if (monsStage.getElementsByTagName('div')[0]) {
-            monsStage.removeChild(monsStage.getElementsByTagName('div')[0]);
-        }
-        this.monsters.map(function(monster) {
-            monsStage.appendChild(monster.render());
+        // if (monsStage.getElementsByTagName('div')[0]) {
+        //     monsStage.removeChild(monsStage.getElementsByTagName('div')[0]);
+        // }
+        this.monsters.forEach(function(monster) {
+            // monsStage.appendChild(monster.render());
+            monster.next();
         })
         this.monsters = this.monsters.filter(function(monster) {
+            let flag = monster.stateType == 'died';
+            if (flag) {
+                monsStage.removeChild(monster.render());
+            }
             return !(monster.stateType == 'died');
         })
     }

@@ -202,7 +202,8 @@ export default class Monster {
         this.stateType = 'died';
     }
 
-    render() {
+    next() {
+
         let state = this.type + "-" + this.state;
         let style = this.pic.style;
         if (this.stateType == 'walk') {
@@ -217,6 +218,9 @@ export default class Monster {
         style.width = this.act[state].width + "px";
         style.height = this.act[state].height + "px";
         style.left = this.left + "px";
+    }
+
+    render() {
         return this.pic;
     }
 }
