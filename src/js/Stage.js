@@ -119,6 +119,7 @@ export default class Stage {
         //     </div>
         // </div>
         this.playInit();
+
         this.playStart();
         // this.interval = setInterval(function() {
         // let monster = new Monster();
@@ -131,6 +132,7 @@ export default class Stage {
 
     playStart() {
         this.level += 1;
+        // this.renderLevel(this.level);
         this.levelObj.play(this.level, this.appendMonster.bind(this));
 
         this.monsterInterval = setInterval(function() {
@@ -220,6 +222,7 @@ export default class Stage {
         stage.appendChild(page);
         this.score = 0;
         this.renderGameScore(this.score);
+        this.renderLevel(this.level);
         // this.startT = new Date().getTime();
         // console.log(this.startT);
     }
@@ -236,21 +239,26 @@ export default class Stage {
     }
 
     renderGameScore(num) {
-        let numArray = [];
         let scoreDOM = document.getElementsByClassName('score')[0];
         while (scoreDOM.hasChildNodes()) {
             scoreDOM.removeChild(scoreDOM.lastChild);
         }
-        do {
-            numArray.push(num % 10);
-            num = Math.floor(num / 10);
-        } while (num / 10 != 0);
-        numArray.reverse().unshift('x');
+        let numArray = this.num2arr(num);
+        numArray.unshift('x');
         numArray.forEach(function(number) {
             let num = document.createElement('div');
             num.className = 'NumGameScore-' + number;
             scoreDOM.appendChild(num);
         })
+    }
+
+    num2arr(num) {
+        let numArray = [];
+        do {
+            numArray.push(num % 10);
+            num = Math.floor(num / 10);
+        } while (num / 10 != 0);
+        return numArray.reverse();
     }
 
     renderScore(num) {
@@ -340,8 +348,22 @@ export default class Stage {
         if (this.monsters.length == 0 && this.levelObj.levelClear == true) {
             clearInterval(this.monsterInterval);
             console.log('level: ' + (this.level + 1));
+            this.renderLevel(this.level);
             setTimeout(this.playStart.bind(this), 3000);
         }
+    }
+
+    renderLevel(num) {
+        let lvlDOM = document.getElementsByClassName('lvl')[0];
+        while (lvlDOM.hasChildNodes()) {
+            lvlDOM.removeChild(lvlDOM.lastChild);
+        }
+        let lvlArray = this.num2arr(num + 1);
+        lvlArray.forEach(x => {
+            let lvl = document.createElement('div');
+            lvl.className = 'lvl-num lvl-num-' + x;
+            lvlDOM.appendChild(lvl);
+        })
     }
 
     killMonster(num) {

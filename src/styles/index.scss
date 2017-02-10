@@ -245,6 +245,52 @@ html {
                 background: url("NumGameScore.png") no-repeat -0px -92px;
             }
         }
+        .lvl {
+            // width: 114px;
+            height: 74px;
+            line-height: 74px;
+            right: 100px;
+            top: 20px;
+            position: absolute;
+            text-align: right;
+            $lvlnum-width: 58px;
+            .lvl-num {
+                background-image: url("Num.png");
+                width: #{$lvlnum-width};
+                height: 74px;
+                display: inline-block;
+            }
+            .lvl-num-0 {
+                background-position: 0 0;
+            }
+            .lvl-num-1 {
+                background-position: #{-$lvlnum-width*1} 0;
+            }
+            .lvl-num-2 {
+                background-position: #{-$lvlnum-width*2} 0;
+            }
+            .lvl-num-3 {
+                background-position: #{-$lvlnum-width*3} 0;
+            }
+            .lvl-num-4 {
+                background-position: #{-$lvlnum-width*4} 0;
+            }
+            .lvl-num-5 {
+                background-position: #{-$lvlnum-width*5} 0;
+            }
+            .lvl-num-6 {
+                background-position: #{-$lvlnum-width*6} 0;
+            }
+            .lvl-num-7 {
+                background-position: #{-$lvlnum-width*7} 0;
+            }
+            .lvl-num-8 {
+                background-position: #{-$lvlnum-width*8} 0;
+            }
+            .lvl-num-9 {
+                background-position: #{-$lvlnum-width*9} 0;
+            }
+        }
     }
     .mons-stage {
         .mons {
