@@ -14,6 +14,7 @@ export default class Stage {
         this.aotu = new Aotuman();
         this.score = 0;
         this.level = 0;
+        this.power = 0;
         this.startTime = 0;
         this.levelObj = new Level();
     }
@@ -222,7 +223,11 @@ export default class Stage {
         stage.appendChild(page);
         this.score = 0;
         this.renderGameScore(this.score);
+        this.level = 0;
         this.renderLevel(this.level);
+        // this.power = 0;
+        this.power = 0;
+        this.renderPower(this.power);
         // this.startT = new Date().getTime();
         // console.log(this.startT);
     }
@@ -249,6 +254,15 @@ export default class Stage {
             let num = document.createElement('div');
             num.className = 'NumGameScore-' + number;
             scoreDOM.appendChild(num);
+        })
+    }
+
+    renderPower(power) {
+
+        let powerFillDOM = document.getElementsByClassName('power-fill')[0];
+        let browsers = ['transform', 'msTransform', 'mozTransform', 'webkitTransform', 'oTransform'];
+        browsers.forEach(x => {
+            powerFillDOM.style[x] = 'scaleX(' + power / 100 + ')';
         })
     }
 
@@ -371,12 +385,38 @@ export default class Stage {
         for (let i = 0; i < this.monsters.length; i++) {
             if (this.monsters[i].stateType == 'walk' && this.monsters[i].type == num) {
                 this.monsters[i].die();
-                this.score += 1;
-                this.renderGameScore(this.score);
-                this.renderBullet([this.monsters[i].left, this.monsters[i].top])
+                this.renderBullet([this.monsters[i].left, this.monsters[i].top]);
                 flag = true;
                 break;
             }
         }
+        if (flag) {
+            this.score += 1;
+            this.renderGameScore(this.score);
+            this.powerUp();
+        }
+    }
+
+    powerUp() {
+        let powerFillDOM = document.getElementsByClassName('power-fill')[0];
+
+        if (this.power < 99) {
+            this.power += 1;
+        } else if (this.power == 99) {
+            this.power += 1;
+
+            function reverse() {
+                if (powerFillDOM.className == 'power-fill') {
+                    powerFillDOM.className = 'full power-fill';
+                } else {
+                    powerFillDOM.className = 'power-fill';
+                }
+                setTimeout(reverse, 100);
+            }
+            reverse();
+        } else {
+
+        }
+        this.renderPower(this.power);
     }
 }
