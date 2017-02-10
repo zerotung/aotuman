@@ -14,8 +14,14 @@ export default class Level {
     }
 
     play(level, callback) {
+        if (this.level.length < level) {
+            this.appendLevel(level);
+        }
         this.index = 0;
         this.levelClear = false;
+        let total = this.level[level - 1].reduce((x, y) => x + y);
+        let magn = total / (4500 + 3500 * (level + 2));
+        this.level[level - 1] = this.level[level - 1].map(x => Math.floor(x / magn));
         console.log(this.level[level - 1].reduce((x, y) => x + y));
         this.wrapTimeout(level, callback);
     }
@@ -31,4 +37,19 @@ export default class Level {
             this.levelClear = true;
         }
     }
+
+    appendLevel(level) {
+        let levelNow = this.level[level - 2],
+            levelBefore = this.level[level - 5],
+            levelNew = [];
+        // length = levelNow.length - levelBefore;
+        for (var i = 0; i < levelNow.length; i++) {
+            levelNew.push(levelNow[i]);
+            if (levelBefore[i]) {
+                levelNew.push(Math.abs(levelNow[i] - levelBefore[i]))
+            }
+        }
+        this.level.push(levelNew);
+    }
+
 }
