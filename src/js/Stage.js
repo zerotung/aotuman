@@ -155,7 +155,6 @@ export default class Stage {
             stage.removeChild(stage.getElementsByTagName('div')[0]);
         }
         let page = document.createElement('div'),
-            aotuman = document.createElement('div'),
             topbar = document.createElement('div'),
             powerSlot = document.createElement('div'),
             powerFill = document.createElement('div'),
@@ -169,7 +168,6 @@ export default class Stage {
             control3 = document.createElement('div'),
             control4 = document.createElement('div');
         page.className = "page-2";
-        aotuman.className = "aotuman";
         topbar.className = "topbar";
         powerSlot.className = "power-slot";
         powerFill.className = "power-fill";
@@ -206,8 +204,7 @@ export default class Stage {
                 this.killMonster(4);
             }
         }.bind(this));
-        aotuman.appendChild(this.aotu.render());
-        page.appendChild(aotuman);
+        page.appendChild(this.aotu.render());
         topbar.appendChild(powerSlot);
         topbar.appendChild(powerFill);
         topbar.appendChild(monsIcon);
@@ -225,8 +222,8 @@ export default class Stage {
         this.renderGameScore(this.score);
         this.level = 0;
         this.renderLevel(this.level);
-        // this.power = 0;
         this.power = 0;
+        // this.power = 90;
         this.renderPower(this.power);
         // this.startT = new Date().getTime();
         // console.log(this.startT);
@@ -398,18 +395,26 @@ export default class Stage {
     }
 
     powerUp() {
-        let powerFillDOM = document.getElementsByClassName('power-fill')[0];
-
+        let powerFillDOM = document.getElementsByClassName('power-fill')[0],
+            page = document.getElementsByClassName('page-2')[0];
         if (this.power < 99) {
             this.power += 1;
         } else if (this.power == 99) {
             this.power += 1;
+            let superStrikeDOM = document.createElement('div');
+            superStrikeDOM.className = 'super-strike';
+            page.appendChild(superStrikeDOM);
 
             function reverse() {
                 if (powerFillDOM.className == 'power-fill') {
                     powerFillDOM.className = 'full power-fill';
                 } else {
                     powerFillDOM.className = 'power-fill';
+                }
+                if (superStrikeDOM.className == 'super-strike') {
+                    superStrikeDOM.className = 'full super-strike';
+                } else {
+                    superStrikeDOM.className = 'super-strike';
                 }
                 setTimeout(reverse, 100);
             }

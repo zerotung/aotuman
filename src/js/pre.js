@@ -23,16 +23,12 @@ export default class Preload {
         let PreloadedArr = this.preImages.filter(function(img) {
             return img.isLoad;
         });
-        // let isAllPreloaded = this.preImages.every(function(img) {
-        //     return img.isLoad;
-        // });
         let isAllPreloaded = PreloadedArr.length == this.preImages.length
         if (isAllPreloaded) {
             done();
-            // console.log("done!");
         } else {
             notyet([PreloadedArr.length, this.preImages.length]);
-            // console.log("not yet!");
         }
     }
+
 }

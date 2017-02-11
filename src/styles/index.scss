@@ -127,12 +127,57 @@ html {
     background-size: 100%;
     position: relative;
     .aotuman {
-        // width: 262px;
-        // height: 290px;
-        // background: url("Aotuman.png") no-repeat -586px -290px;
+        width: 262px;
+        height: 290px;
+        background: url("Aotuman.png") no-repeat -586px -290px;
         position: absolute;
         left: 18px;
         top: 139px;
+        &.aotuman1-1 {
+            width: 262px;
+            height: 290px;
+            background-position: -586px -290px;
+        },
+        &.aotuman2-1 {
+            width: 274px;
+            height: 290px;
+            background-position: -572px -581px;
+        },
+        &.aotuman2-2 {
+            width: 313px;
+            height: 293px;
+            background-position: -0px -0px;
+        },
+        &.aotuman2-3 {
+            width: 274px;
+            height: 290px;
+            background-position: -313px -0px;
+        },
+        &.aotuman3-1 {
+            width: 274px;
+            height: 288px;
+            background-position: -312px -293px;
+        },
+        &.aotuman3-2 {
+            width: 298px;
+            height: 293px;
+            background-position: -0px -586px;
+        },
+        &.aotuman3-3 {
+            width: 274px;
+            height: 293px;
+            background-position: -298px -586px;
+        },
+        &.aotuman4-1 {
+            width: 244px;
+            height: 291px;
+            background-position: -846px -580px;
+        },
+        &.aotuman4-2 {
+            width: 312px;
+            height: 293px;
+            background-position: -0px -293px;
+        }
     }
     .topbar {
         .power-slot {
@@ -154,7 +199,7 @@ html {
             position: absolute;
             left: 131px;
             top: 36px;
-            border-radius: 4px;
+            border-radius: 5px;
             overflow: hidden;
             &.full {
                 background-position: 0 -37px;
@@ -299,13 +344,177 @@ html {
         }
     }
     .mons-stage {
-        .mons {
-            width: 216px;
-            height: 196px;
-            background: url("Monsters.png") no-repeat -434px -980px;
-            position: absolute;
-            left: 510px;
-            top: 205px;
+        @at-root{
+            
+            .mons {
+                width: 216px;
+                height: 196px;
+                background: url("Monsters.png") no-repeat -434px -980px;
+                position: absolute;
+                left: 510px;
+                top: 205px;
+                &.mons1-1 {
+                    width: 216px;
+                    height: 196px;
+                    background-position: -434px -980px;
+                }
+                &.mons1-2 {
+                    width: 217px;
+                    height: 196px;
+                    background-position: -0px -872px;
+                }
+                &.mons1-3 {
+                    width: 216px;
+                    height: 196px;
+                    background-position: -434px -980px;
+                }
+                &.mons1-4 {
+                    width: 216px;
+                    height: 196px;
+                    background-position: -650px -784px;
+                }
+                &.mons1-5 {
+                    width: 216px;
+                    height: 196px;
+                    background-position: -440px -392px;
+                }
+                &.mons1-6 {
+                    width: 208px;
+                    height: 200px;
+                    background-position: -866px -390px;
+                }
+                &.mons1-7 {
+                    width: 209px;
+                    height: 190px;
+                    background-position: -656px -380px;
+                }
+                &.mons1-8 {
+                    width: 224px;
+                    height: 169px;
+                    background-position: -0px -338px;
+                }
+                &.mons2-1 {
+                    width: 216px;
+                    height: 196px;
+                    background-position: -440px -196px;
+                }
+                &.mons2-2 {
+                    width: 217px;
+                    height: 196px;
+                    background-position: -0px -676px;
+                }
+                &.mons2-3 {
+                    width: 216px;
+                    height: 196px;
+                    background-position: -440px -196px;
+                }
+                &.mons2-4 {
+                    width: 216px;
+                    height: 196px;
+                    background-position: -650px -980px;
+                }
+                &.mons2-5 {
+                    width: 216px;
+                    height: 196px;
+                    background-position: -650px -588px;
+                }
+                &.mons2-6 {
+                    width: 208px;
+                    height: 200px;
+                    background-position: -865px -190px;
+                }
+                &.mons2-7 {
+                    width: 209px;
+                    height: 190px;
+                    background-position: -656px -190px;
+                }
+                &.mons2-8 {
+                    width: 224px;
+                    height: 169px;
+                    background-position: -0px -169px;
+                }
+                &.mons3-1 {
+                    width: 216px;
+                    height: 196px;
+                    background-position: -440px -0px;
+                }
+                &.mons3-2 {
+                    width: 217px;
+                    height: 196px;
+                    background-position: -217px -676px;
+                }
+                &.mons3-3 {
+                    width: 216px;
+                    height: 196px;
+                    background-position: -440px -0px;
+                }
+                &.mons3-4 {
+                    width: 216px;
+                    height: 196px;
+                    background-position: -434px -588px;
+                }
+                &.mons3-5 {
+                    width: 216px;
+                    height: 196px;
+                    background-position: -224px -392px;
+                }
+                &.mons3-6 {
+                    width: 208px;
+                    height: 200px;
+                    background-position: -866px -590px;
+                }
+                &.mons3-7 {
+                    width: 209px;
+                    height: 190px;
+                    background-position: -656px -0px;
+                }
+                &.mons3-8 {
+                    width: 224px;
+                    height: 169px;
+                    background-position: -0px -507px;
+                }
+                &.mons4-1 {
+                    width: 216px;
+                    height: 196px;
+                    background-position: -434px -784px;
+                }
+                &.mons4-2 {
+                    width: 217px;
+                    height: 196px;
+                    background-position: -217px -872px;
+                }
+                &.mons4-3 {
+                    width: 216px;
+                    height: 196px;
+                    background-position: -434px -784px;
+                }
+                &.mons4-4 {
+                    width: 216px;
+                    height: 196px;
+                    background-position: -224px -196px;
+                }
+                &.mons4-5 {
+                    width: 216px;
+                    height: 196px;
+                    background-position: -224px -0px;
+                }
+                &.mons4-6 {
+                    width: 208px;
+                    height: 200px;
+                    background-position: -866px -790px;
+                }
+                &.mons4-7 {
+                    width: 209px;
+                    height: 190px;
+                    background-position: -865px -0px;
+                }
+                &.mons4-8 {
+                    width: 224px;
+                    height: 169px;
+                    background-position: -0px -0px;
+                }
+                
+            }
         }
         .bullet {
             background-image: url("Bullet.png");
@@ -315,6 +524,20 @@ html {
             transition: transform .1s linear;
         }
     }
+    .super-strike {
+        width: 201px;
+        height: 215px;
+        background-image: url("SuperStrike.png");
+        position: absolute;
+        left: 200px;
+        bottom: 130px;
+        z-index: 1000;
+        background-position: 0 0;
+        &.full {
+            background-position: -201px 0;
+        }
+    }
+
     .control {
         width: 1136px;
         height: 139px;

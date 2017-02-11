@@ -5,6 +5,11 @@ import Pre from './Pre.js';
 
 let stage = new Stage();
 
+// 防止上下滑屏幕让屏幕禁止
+document.getElementsByClassName('stage')[0].addEventListener('touchmove', function(e) {
+    e.preventDefault();
+});
+
 // let aotu = new Aotulman();
 // let monsters = [];
 
