@@ -14,7 +14,6 @@ export default class Stage {
         this.aotu = new Aotuman();
         this.score = 0;
         this.level = 0;
-        this.power = 0;
         this.startTime = 0;
         this.levelObj = new Level();
     }
@@ -143,7 +142,7 @@ export default class Stage {
                 })) {
                 clearInterval(this.interval);
                 clearInterval(this.monsterInterval);
-                this.end();
+                // this.end();
             }
         }.bind(this), 600 / (this.level + 5));
     }
@@ -180,30 +179,28 @@ export default class Stage {
         control2.className = "key control-2";
         control3.className = "key control-3";
         control4.className = "key control-4";
+        let self = this;
         control1.addEventListener('touchend', function() {
-            if (!(this.aotu.shooting)) {
-                this.aotu.singleBullet();
-                this.killMonster(1);
-            }
-        }.bind(this));
+            self.aotu.hit(() => {
+                self.killMonster(1);
+            })
+        });
         control2.addEventListener('touchend', function() {
-            if (!(this.aotu.shooting)) {
-                this.aotu.singleBullet();
-                this.killMonster(2);
-            }
-        }.bind(this));
+            self.aotu.hit(() => {
+                self.killMonster(2);
+            })
+        });
         control3.addEventListener('touchend', function() {
-            if (!(this.aotu.shooting)) {
-                this.aotu.singleBullet();
-                this.killMonster(3);
-            }
-        }.bind(this));
+            self.aotu.hit(() => {
+                self.killMonster(3);
+            })
+        });
         control4.addEventListener('touchend', function() {
-            if (!(this.aotu.shooting)) {
-                this.aotu.singleBullet();
-                this.killMonster(4);
-            }
-        }.bind(this));
+            self.aotu.hit(() => {
+                self.killMonster(4);
+            })
+        });
+        this.aotu = new Aotuman();
         page.appendChild(this.aotu.render());
         topbar.appendChild(powerSlot);
         topbar.appendChild(powerFill);
@@ -222,9 +219,9 @@ export default class Stage {
         this.renderGameScore(this.score);
         this.level = 0;
         this.renderLevel(this.level);
-        this.power = 0;
+        // this.power = 0;
         // this.power = 90;
-        this.renderPower(this.power);
+        this.renderPower(this.aotu.power);
         // this.startT = new Date().getTime();
         // console.log(this.startT);
     }
@@ -255,7 +252,6 @@ export default class Stage {
     }
 
     renderPower(power) {
-
         let powerFillDOM = document.getElementsByClassName('power-fill')[0];
         let browsers = ['transform', 'msTransform', 'mozTransform', 'webkitTransform', 'oTransform'];
         browsers.forEach(x => {
@@ -390,38 +386,39 @@ export default class Stage {
         if (flag) {
             this.score += 1;
             this.renderGameScore(this.score);
-            this.powerUp();
+            this.aotu.powerUp(this.renderPower, this.powerFull);
+        } else {
+            this.aotu.powerDown(this.renderPower);
         }
     }
 
-    powerUp() {
+    powerFull() {
         let powerFillDOM = document.getElementsByClassName('power-fill')[0],
+            powerSlotDOM = document.getElementsByClassName('power-slot')[0],
             page = document.getElementsByClassName('page-2')[0];
-        if (this.power < 99) {
-            this.power += 1;
-        } else if (this.power == 99) {
-            this.power += 1;
-            let superStrikeDOM = document.createElement('div');
-            superStrikeDOM.className = 'super-strike';
-            page.appendChild(superStrikeDOM);
 
-            function reverse() {
-                if (powerFillDOM.className == 'power-fill') {
-                    powerFillDOM.className = 'full power-fill';
-                } else {
-                    powerFillDOM.className = 'power-fill';
-                }
-                if (superStrikeDOM.className == 'super-strike') {
-                    superStrikeDOM.className = 'full super-strike';
-                } else {
-                    superStrikeDOM.className = 'super-strike';
-                }
-                setTimeout(reverse, 100);
+        let superStrikeDOM = document.createElement('div');
+        superStrikeDOM.className = 'super-strike';
+        page.appendChild(superStrikeDOM);
+
+        function reverse() {
+            if (powerFillDOM.className == 'power-fill') {
+                powerFillDOM.className = 'full power-fill';
+            } else {
+                powerFillDOM.className = 'power-fill';
             }
-            reverse();
-        } else {
-
+            if (powerSlotDOM.className == 'power-slot') {
+                powerSlotDOM.className = 'full power-slot';
+            } else {
+                powerSlotDOM.className = 'power-slot';
+            }
+            if (superStrikeDOM.className == 'super-strike') {
+                superStrikeDOM.className = 'full super-strike';
+            } else {
+                superStrikeDOM.className = 'super-strike';
+            }
+            setTimeout(reverse, 100);
         }
-        this.renderPower(this.power);
+        reverse();
     }
 }

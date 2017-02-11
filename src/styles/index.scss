@@ -188,6 +188,9 @@ html {
             position: absolute;
             left: 0;
             top: 0;
+            &.full {
+                background-position: 0 122px;
+            }
         }
         .power-fill {
             width: 373px;
