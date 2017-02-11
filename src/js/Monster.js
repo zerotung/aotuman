@@ -7,7 +7,7 @@ export default class Monster {
         this.state = 1;
         this.stateType = 'walk';
         this.left = 1136;
-        this.top = Math.floor(Math.random() * 170 + 90);
+        this.bottom = Math.floor(Math.random() * 220 + 130);
         this.init();
     }
 
@@ -17,9 +17,8 @@ export default class Monster {
         style.position = "absolute";
         this.next();
         style.left = this.left + "px";
-        style.zIndex = this.top;
-        style.top = this.top + "px";
-
+        style.zIndex = 400 - this.bottom;
+        style.bottom = this.bottom + "px";
     }
 
     walk() {
@@ -29,7 +28,7 @@ export default class Monster {
     die() {
         this.stateType = 'die';
         this.state = this.state < 5 ? 5 : this.state + 1;
-        if (this.state > 8) {
+        if (this.state > 12) {
             this.died();
         }
     }
@@ -40,7 +39,7 @@ export default class Monster {
 
     next() {
 
-        let state = this.type + "-" + this.state;
+        let state = this.type + "-" + ((this.state < 9) ? this.state : 8);
         let style = this.pic.style;
         if (this.stateType == 'walk') {
             this.walk();
@@ -51,7 +50,9 @@ export default class Monster {
         }
         this.left -= 10;
         this.pic.className = 'mons mons' + state;
-        style.left = this.left + "px";
+        if (this.state < 9) {
+            style.left = this.left + "px";
+        }
     }
 
     render() {

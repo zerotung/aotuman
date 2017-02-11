@@ -22,6 +22,8 @@ window.onload = function() {
             'static/StartBtn.png',
             // game page
             'static/Aotuman.png',
+            'static/GameGrass.png',
+            'static/Gap.png',
             'static/Key.png',
             'static/MonsIcon.png',
             'static/Monsters.png',

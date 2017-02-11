@@ -138,11 +138,11 @@ export default class Stage {
         this.monsterInterval = setInterval(function() {
             this.renderMonster();
             if (this.monsters.some(function(monster) {
-                    return monster.left < 310;
+                    return monster.left < 300;
                 })) {
                 clearInterval(this.interval);
                 clearInterval(this.monsterInterval);
-                // this.end();
+                this.end();
             }
         }.bind(this), 600 / (this.level + 5));
     }
@@ -154,6 +154,8 @@ export default class Stage {
             stage.removeChild(stage.getElementsByTagName('div')[0]);
         }
         let page = document.createElement('div'),
+            grass = document.createElement('div'),
+            gap = document.createElement('div'),
             topbar = document.createElement('div'),
             powerSlot = document.createElement('div'),
             powerFill = document.createElement('div'),
@@ -167,6 +169,8 @@ export default class Stage {
             control3 = document.createElement('div'),
             control4 = document.createElement('div');
         page.className = "page-2";
+        grass.className = "grass";
+        gap.className = "gap";
         topbar.className = "topbar";
         powerSlot.className = "power-slot";
         powerFill.className = "power-fill";
@@ -202,6 +206,8 @@ export default class Stage {
         });
         this.aotu = new Aotuman();
         page.appendChild(this.aotu.render());
+        page.appendChild(grass);
+        page.appendChild(gap);
         topbar.appendChild(powerSlot);
         topbar.appendChild(powerFill);
         topbar.appendChild(monsIcon);

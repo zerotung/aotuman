@@ -122,9 +122,10 @@ html {
 .page-2 {
     width: 100%;
     height: 100%;
-    background-image: url("game_bg.jpg");
+    background: url("game_bg.jpg");
     background-repeat: no-repeat;
-    background-size: 100%;
+    // background-size: cover;
+    background-attachment: fixed;
     position: relative;
     .aotuman {
         width: 262px;
@@ -132,7 +133,7 @@ html {
         background: url("Aotuman.png") no-repeat -586px -290px;
         position: absolute;
         left: 18px;
-        top: 139px;
+        top: 120px;
         &.aotuman1-1 {
             width: 262px;
             height: 290px;
@@ -180,7 +181,9 @@ html {
         }
     }
     .topbar {
+
         .power-slot {
+            z-index: 1000;
             width: 521px;
             height: 122px;
             background-image: url("PowerSlot.png");
@@ -193,6 +196,7 @@ html {
             }
         }
         .power-fill {
+            z-index: 1000;
             width: 373px;
             height: 37px;
             background-image: url("PowerFill.png");
@@ -209,6 +213,7 @@ html {
             }
         }
         .mons-icon {
+            z-index: 1000;
             width: 86px;
             height: 86px;
             background-image: url("MonsIcon.png");
@@ -217,6 +222,7 @@ html {
             top: 10px;
         }
         .score {
+            z-index: 1000;
             height: 70px;
             line-height: 70px;
             left: 750px;
@@ -300,6 +306,7 @@ html {
             }
         }
         .lvl {
+            z-index: 1000;
             // width: 114px;
             height: 74px;
             line-height: 74px;
@@ -355,7 +362,7 @@ html {
                 background: url("Monsters.png") no-repeat -434px -980px;
                 position: absolute;
                 left: 510px;
-                top: 205px;
+
                 &.mons1-1 {
                     width: 216px;
                     height: 196px;
@@ -540,13 +547,32 @@ html {
             background-position: -201px 0;
         }
     }
-
+    .grass {
+        width: 1136px;
+        height: 228px;
+        background-image: url("GameGrass.png");
+        position: absolute;
+        left: 0;
+        z-index: 500;
+        // top: 500px;
+        bottom: 0;
+    }
+    .gap {
+        width: 53px;
+        height: 452px;
+        background-image: url("Gap.png");
+        position: absolute;
+        left: 270px;
+        top: 0;
+    }
     .control {
         width: 1136px;
         height: 139px;
+        z-index: 1000;
         // background-image: url("Key.png");
         position: absolute;
         left: 0;
+        // top: 500px;
         bottom: 0;
         $controlwidth: 284px;
         $controlheight: 139px;
