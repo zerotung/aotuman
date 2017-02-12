@@ -138,42 +138,50 @@ html {
             width: 262px;
             height: 290px;
             background-position: -586px -290px;
-        },
+        }
+        ,
         &.aotuman2-1 {
             width: 274px;
             height: 290px;
             background-position: -572px -581px;
-        },
+        }
+        ,
         &.aotuman2-2 {
             width: 313px;
             height: 293px;
             background-position: -0px -0px;
-        },
+        }
+        ,
         &.aotuman2-3 {
             width: 274px;
             height: 290px;
             background-position: -313px -0px;
-        },
+        }
+        ,
         &.aotuman3-1 {
             width: 274px;
             height: 288px;
             background-position: -312px -293px;
-        },
+        }
+        ,
         &.aotuman3-2 {
             width: 298px;
             height: 293px;
             background-position: -0px -586px;
-        },
+        }
+        ,
         &.aotuman3-3 {
             width: 274px;
             height: 293px;
             background-position: -298px -586px;
-        },
+        }
+        ,
         &.aotuman4-1 {
             width: 244px;
             height: 291px;
             background-position: -846px -580px;
-        },
+        }
+        ,
         &.aotuman4-2 {
             width: 312px;
             height: 293px;
@@ -181,7 +189,6 @@ html {
         }
     }
     .topbar {
-
         .power-slot {
             z-index: 1000;
             width: 521px;
@@ -354,15 +361,13 @@ html {
         }
     }
     .mons-stage {
-        @at-root{
-            
+        @at-root {
             .mons {
                 width: 216px;
                 height: 196px;
                 background: url("Monsters.png") no-repeat -434px -980px;
                 position: absolute;
                 left: 510px;
-
                 &.mons1-1 {
                     width: 216px;
                     height: 196px;
@@ -523,7 +528,6 @@ html {
                     height: 169px;
                     background-position: -0px -0px;
                 }
-                
             }
         }
         .bullet {
@@ -568,7 +572,7 @@ html {
     .control {
         width: 1136px;
         height: 139px;
-        z-index: 1000;
+        z-index: 501;
         // background-image: url("Key.png");
         position: absolute;
         left: 0;
@@ -581,6 +585,7 @@ html {
             height: #{$controlheight};
             float: left;
             background: url("Key.png");
+            z-index: 1;
         }
         .control-1 {
             background-position: 0 0;
@@ -610,6 +615,16 @@ html {
             content: "";
             clear: both;
         }
+    }
+    .strike-board {
+        width: 713px;
+        height: 92px;
+        z-index: 510;
+        background: url("StrikeBoard.png") no-repeat;
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 

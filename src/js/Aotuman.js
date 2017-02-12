@@ -5,6 +5,7 @@ export default class Aotuman {
         this.pic = document.createElement('div');
         this.left = 18;
         this.top = 139;
+        this.super = false;
         this.shooting = false;
         this.bulletCache = [];
         this.startT = 0;
@@ -50,44 +51,70 @@ export default class Aotuman {
         }, 100)
     }
 
-    hit(appendBullet) {
-        if (this.shooting == false) {
-            this.bulletCache.push(function() {
-                appendBullet();
-            }.bind(this));
-            if (this.bulletCache.length == 1) {
+    superStrike() {
+        let self = this;
+        self.shooting = true;
+        self.pic.style.left = 0;
+        setTimeout(function() {
+            self.pic.style.left = '18px';
+            self.shooting = false;
+        }, 50);
+    }
 
-                setTimeout(function() {
-                    if (this.bulletCache.length == 1) {
-                        this.bulletCache[0]();
-                        this.singleBullet();
-                    }
+    hit(appendBullet) {
+        if (this.super == false) {
+
+            if (this.shooting == false) {
+                this.bulletCache.push(function() {
+                    appendBullet();
+                }.bind(this));
+                if (this.bulletCache.length == 1) {
+
+                    setTimeout(function() {
+                        if (this.bulletCache.length == 1) {
+                            this.bulletCache[0]();
+                            this.singleBullet();
+                        }
+                        this.bulletCache = [];
+                    }.bind(this), 50);
+                } else {
+                    this.bulletCache[0]();
+                    this.bulletCache[1]();
+                    this.doubleBullet()
                     this.bulletCache = [];
-                }.bind(this), 50);
-            } else {
-                this.bulletCache[0]();
-                this.bulletCache[1]();
-                this.doubleBullet()
-                this.bulletCache = [];
+                }
             }
+        } else {
+            appendBullet();
+            this.superStrike();
         }
+    }
+
+    superMode() {
+        let self = this;
+
+        setTimeout(function() {
+            self.next(4, 1);
+            setTimeout(function() {
+                self.next(4, 2);
+                self.super = true;
+            }, 200);
+        }, 200)
+    }
+
+    rmSuperMode(renderPower) {
+        this.power = 0;
+        this.super = false;
+        renderPower(this.power);
+        this.next();
     }
 
     powerUp(renderPower, powerFull) {
         if (this.power < 100) {
-            this.power += 1;
-            renderPower(this.power);
             if (this.power == 99) {
                 powerFull();
             }
-        } else {
-
-        }
-    }
-
-    powerDown(renderPower) {
-        if (this.power > 0) {
-            this.power -= 1;
+            this.power += 1;
             renderPower(this.power);
         }
     }

@@ -10,6 +10,7 @@ export default class Stage {
         this.init();
         // this.state = 'loading';
         this.interval = null;
+        this.powerInter = null;
         this.monsters = [];
         this.aotu = new Aotuman();
         this.score = 0;
@@ -138,7 +139,7 @@ export default class Stage {
         this.monsterInterval = setInterval(function() {
             this.renderMonster();
             if (this.monsters.some(function(monster) {
-                    return monster.left < 300;
+                    return (monster.left < 300 && monster.stateType == 'walk');
                 })) {
                 clearInterval(this.interval);
                 clearInterval(this.monsterInterval);
@@ -340,7 +341,7 @@ export default class Stage {
         let monsStage = document.getElementsByClassName("mons-stage")[0];
         let bulletDOM = bullet.render();
         monsStage.appendChild(bulletDOM);
-        setTimeout(bullet.trans.bind(bullet), 0);
+        setTimeout(bullet.trans.bind(bullet), 10);
         setTimeout(function() {
             monsStage.removeChild(bulletDOM);
         }, 110);
@@ -384,7 +385,7 @@ export default class Stage {
         for (let i = 0; i < this.monsters.length; i++) {
             if (this.monsters[i].stateType == 'walk' && this.monsters[i].type == num) {
                 this.monsters[i].die();
-                this.renderBullet([this.monsters[i].left, this.monsters[i].top]);
+                this.renderBullet([this.monsters[i].left, this.monsters[i].bottom]);
                 flag = true;
                 break;
             }
@@ -392,9 +393,25 @@ export default class Stage {
         if (flag) {
             this.score += 1;
             this.renderGameScore(this.score);
-            this.aotu.powerUp(this.renderPower, this.powerFull);
+            this.aotu.powerUp(this.renderPower, this.powerFull.bind(this));
         } else {
-            this.aotu.powerDown(this.renderPower);
+            // this.aotu.powerDown(this.renderPower);
+        }
+    }
+
+    killFirstMonster() {
+        let flag = false; // 是否有怪兽被击倒
+        for (let i = 0; i < this.monsters.length; i++) {
+            if (this.monsters[i].stateType == 'walk') {
+                this.monsters[i].die();
+                this.renderBullet([this.monsters[i].left, this.monsters[i].bottom]);
+                flag = true;
+                break;
+            }
+        }
+        if (flag) {
+            this.score += 1;
+            this.renderGameScore(this.score);
         }
     }
 
@@ -403,11 +420,33 @@ export default class Stage {
             powerSlotDOM = document.getElementsByClassName('power-slot')[0],
             page = document.getElementsByClassName('page-2')[0];
 
-        let superStrikeDOM = document.createElement('div');
+        let superStrikeDOM = document.createElement('div'),
+            strikeBoardDOM = document.createElement('div'),
+            superLightDOM = document.createElement('div');
         superStrikeDOM.className = 'super-strike';
+        strikeBoardDOM.className = 'strike-board';
+        superLightDOM.className = 'super-light';
+        strikeBoardDOM.addEventListener('touchend', function() {
+            this.aotu.hit(this.killFirstMonster.bind(this));
+        }.bind(this));
+        superStrikeDOM.addEventListener('touchend', function() {
+            this.aotu.superMode();
+            page.appendChild(strikeBoardDOM);
+            page.appendChild(superLightDOM);
+            setTimeout(function() {
+                page.removeChild(strikeBoardDOM);
+                page.removeChild(superLightDOM);
+                page.removeChild(superStrikeDOM);
+                this.aotu.rmSuperMode(this.renderPower);
+                clearInterval(this.powerInter);
+                powerFillDOM.className = 'power-fill';
+                powerSlotDOM.className = 'power-slot';
+                superStrikeDOM.className = 'super-strike';
+            }.bind(this), 5000);
+        }.bind(this));
         page.appendChild(superStrikeDOM);
 
-        function reverse() {
+        this.powerInter = setInterval(function() {
             if (powerFillDOM.className == 'power-fill') {
                 powerFillDOM.className = 'full power-fill';
             } else {
@@ -423,8 +462,6 @@ export default class Stage {
             } else {
                 superStrikeDOM.className = 'super-strike';
             }
-            setTimeout(reverse, 100);
-        }
-        reverse();
+        }, 100);
     }
 }

@@ -1,7 +1,7 @@
 export default class Bullet {
 
     constructor([endX, endY] = endPos) {
-        this.end = [endX + 20, endY + 50];
+        this.end = [endX, 400 - endY];
         this.start = [280, 250];
         this.img = document.createElement('div');
         // this.img.src = 'static/Bullet.png';
@@ -24,6 +24,7 @@ export default class Bullet {
     }
 
     trans() {
+
         let browsers = ['transform', 'msTransform', 'mozTransform', 'webkitTransform', 'oTransform'];
         browsers.forEach(function(browser) {
             this.img.style[browser] = 'translate(' + (this.end[0] - this.start[0]) + 'px,' + (this.end[1] - this.start[1]) + 'px)';
