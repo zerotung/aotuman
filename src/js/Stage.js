@@ -2,7 +2,7 @@ import Monster from './Monster.js';
 import Aotuman from './Aotuman.js';
 import Bullet from './Bullet.js';
 import Level from './Level.js';
-// import Level from './Level.js';
+import Cookie from './Cookie';
 
 export default class Stage {
 
@@ -59,6 +59,7 @@ export default class Stage {
         // </div>
         if (percent == 1) {
             this.start();
+            // this.end();
 
             console.log('finished');
         } else {
@@ -283,17 +284,25 @@ export default class Stage {
         while (scoreDOM.hasChildNodes()) {
             scoreDOM.removeChild(scoreDOM.lastChild);
         }
-        do {
-            numArray.push(num % 10);
-            num = Math.floor(num / 10);
-        } while (num / 10 != 0);
-        numArray.reverse();
-        console.log(numArray);
+        numArray = this.num2arr(num);
         numArray.forEach(function(number) {
             let num = document.createElement('div');
             num.className = 'NumScore NumScore-' + number;
-            // console.log(num);
             scoreDOM.appendChild(num);
+        })
+    }
+
+    renderHighestScore(num) {
+        let numArray = [];
+        let highestScoreDOM = document.getElementsByClassName('highest-score')[0];
+        while (highestScoreDOM.hasChildNodes()) {
+            highestScoreDOM.removeChild(highestScoreDOM.lastChild);
+        }
+        numArray = this.num2arr(num);
+        numArray.forEach(function(number) {
+            let num = document.createElement('div');
+            num.className = 'HighestScore HighestScore-' + number;
+            highestScoreDOM.appendChild(num);
         })
     }
 
@@ -306,7 +315,6 @@ export default class Stage {
         //     <div className="share"></div>
         //     <div className="grass"></div>
         // </div>
-
         let stage = document.getElementsByClassName('stage')[0];
         if (stage.getElementsByTagName('div')[0]) {
             stage.removeChild(stage.getElementsByTagName('div')[0]);
@@ -316,6 +324,7 @@ export default class Stage {
             aotuman = document.createElement('div'),
             scoreBoard = document.createElement('div'),
             score = document.createElement('div'),
+            highestScoreDOM = document.createElement('div'),
             restart = document.createElement('div'),
             share = document.createElement('div');
         page.className = 'page-3';
@@ -323,6 +332,7 @@ export default class Stage {
         aotuman.className = 'aotuman';
         scoreBoard.className = 'score-board';
         score.className = 'score';
+        highestScoreDOM.className = 'highest-score';
         restart.className = 'restart';
         restart.addEventListener('touchend', function() {
             this.start();
@@ -330,12 +340,19 @@ export default class Stage {
         share.className = 'share';
         page.appendChild(aotuman);
         scoreBoard.appendChild(score);
+        scoreBoard.appendChild(highestScoreDOM);
         page.appendChild(scoreBoard);
         page.appendChild(grass);
         page.appendChild(restart);
         page.appendChild(share);
         stage.appendChild(page);
         this.renderScore(this.score);
+        let highestScore = Cookie.prototype.getCookie('hs');
+        if (highestScore == null || highestScore < this.score) {
+            Cookie.prototype.setCookie('hs', this.score, '100', 'y');
+            highestScore = this.score;
+        }
+        this.renderHighestScore(highestScore);
     }
 
     renderBullet(position) {

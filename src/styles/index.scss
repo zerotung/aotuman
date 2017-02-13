@@ -742,6 +742,52 @@ html {
                 background-position: #{-$numscore-width*9} 0px;
             }
         }
+        .highest-score {
+            position: absolute;
+            width: 180px;
+            height: 48px;
+            right: 35px;
+            top: 130px;
+            text-align: center;
+            $highestscore-width: 45px;
+            .HighestScore {
+                display: inline-block;
+                width: #{$highestscore-width};
+                height: 48px;
+                background: url("NumHighest.png")
+            }
+            .HighestScore-0 {
+                background-position: 0px 0px;
+            }
+            .HighestScore-1 {
+                background-position: #{-$highestscore-width} 0px;
+            }
+            .HighestScore-2 {
+                background-position: #{-$highestscore-width*2} 0px;
+            }
+            .HighestScore-3 {
+                background-position: #{-$highestscore-width*3} 0px;
+            }
+            .HighestScore-4 {
+                background-position: #{-$highestscore-width*4} 0px;
+            }
+            .HighestScore-5 {
+                background-position: #{-$highestscore-width*5} 0px;
+            }
+            .HighestScore-6 {
+                background-position: #{-$highestscore-width*6} 0px;
+            }
+            .HighestScore-7 {
+                background-position: #{-$highestscore-width*7} 0px;
+            }
+            .HighestScore-8 {
+                background-position: #{-$highestscore-width*8} 0px;
+            }
+            .HighestScore-9 {
+                background-position: #{-$highestscore-width*9} 0px;
+            }
+
+        }
     }
     .restart {
         width: #{$restart-width};

@@ -1,3 +1,5 @@
+const POWER_TOP = 100;
+
 export default class Aotuman {
 
     constructor() {
@@ -110,8 +112,8 @@ export default class Aotuman {
     }
 
     powerUp(renderPower, powerFull) {
-        if (this.power < 100) {
-            if (this.power == 99) {
+        if (this.power < POWER_TOP) {
+            if (this.power == POWER_TOP - 1) {
                 powerFull();
             }
             this.power += 1;
