@@ -121,7 +121,9 @@ export default class Stage {
         // </div>
         this.playInit();
 
-        this.playStart();
+        setTimeout(function() {
+            this.playStart();
+        }.bind(this), 3000);
         // this.interval = setInterval(function() {
         // let monster = new Monster();
         // this.monsters.push(monster);
@@ -377,7 +379,11 @@ export default class Stage {
             let lvl = document.createElement('div');
             lvl.className = 'lvl-num lvl-num-' + x;
             lvlDOM.appendChild(lvl);
-        })
+        });
+        lvlDOM.className = 'lvl show';
+        setTimeout(function() {
+            lvlDOM.className = 'lvl'
+        }, 2000);
     }
 
     killMonster(num) {

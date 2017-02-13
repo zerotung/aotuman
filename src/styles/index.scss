@@ -11,6 +11,13 @@ html {
     to {transform: rotate(360deg);}
 }
 
+@keyframes showlvl {
+    0% {right: 40%;top: 40%; transform: scale(0);}
+    25% {right: 40%;top: 40%; transform: scale(3);}
+    50% {right: 40%;top: 40%; transform: scale(3);}
+    100% {right: 100px; top: 20px; transform: scale(1);}
+}
+
 .stage {
     width: 100%;
     height: 100%;
@@ -330,6 +337,7 @@ html {
             top: 20px;
             position: absolute;
             text-align: right;
+            // transform-origin: 50%;
             $lvlnum-width: 58px;
             .lvl-num {
                 background-image: url("Num.png");
@@ -366,6 +374,9 @@ html {
             }
             .lvl-num-9 {
                 background-position: #{-$lvlnum-width*9} 0;
+            }
+            &.show {
+                animation: showlvl ease-in-out 2s;
             }
         }
     }
