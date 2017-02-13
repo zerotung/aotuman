@@ -416,10 +416,11 @@ export default class Stage {
     }
 
     powerFull() {
+        const SUPER_TIME = 5000;
         let powerFillDOM = document.getElementsByClassName('power-fill')[0],
             powerSlotDOM = document.getElementsByClassName('power-slot')[0],
             page = document.getElementsByClassName('page-2')[0];
-
+        let powerFillClassName = powerFillDOM.className;
         let superStrikeDOM = document.createElement('div'),
             strikeBoardDOM = document.createElement('div'),
             superLightDOM = document.createElement('div');
@@ -430,19 +431,22 @@ export default class Stage {
             this.aotu.hit(this.killFirstMonster.bind(this));
         }.bind(this));
         superStrikeDOM.addEventListener('touchend', function() {
+            clearInterval(this.powerInter);
+            powerSlotDOM.className = 'power-slot';
+            powerFillDOM.className = 'power-fill';
+            superStrikeDOM.className = 'super-strike';
             this.aotu.superMode();
+            this.renderPower(0);
+            powerFillDOM.className = powerFillClassName + ' decreace';
             page.appendChild(strikeBoardDOM);
             page.appendChild(superLightDOM);
+            page.removeChild(superStrikeDOM);
             setTimeout(function() {
+                powerFillDOM.className = 'power-fill';
                 page.removeChild(strikeBoardDOM);
                 page.removeChild(superLightDOM);
-                page.removeChild(superStrikeDOM);
                 this.aotu.rmSuperMode(this.renderPower);
-                clearInterval(this.powerInter);
-                powerFillDOM.className = 'power-fill';
-                powerSlotDOM.className = 'power-slot';
-                superStrikeDOM.className = 'super-strike';
-            }.bind(this), 5000);
+            }.bind(this), SUPER_TIME);
         }.bind(this));
         page.appendChild(superStrikeDOM);
 

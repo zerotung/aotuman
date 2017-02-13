@@ -32,6 +32,9 @@ window.onload = function() {
             'static/game_bg.jpg',
             'static/X.png',
             'static/Bullet.png',
+            'static/SuperLight.png',
+            'static/SuperStrike.png',
+            'static/StrikeBoard.png',
             // end page
             'static/Grass2.png',
             'static/Man2.png',
