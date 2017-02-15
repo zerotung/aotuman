@@ -166,24 +166,16 @@ export default class Stage {
         control4.className = "key control-4";
         let self = this;
         control1.addEventListener('touchend', function() {
-            self.aotu.hit(() => {
-                self.killMonster(1);
-            })
+            self.aotu.hit(self.killMonster.bind(self, 1))
         });
         control2.addEventListener('touchend', function() {
-            self.aotu.hit(() => {
-                self.killMonster(2);
-            })
+            self.aotu.hit(self.killMonster.bind(self, 2))
         });
         control3.addEventListener('touchend', function() {
-            self.aotu.hit(() => {
-                self.killMonster(3);
-            })
+            self.aotu.hit(self.killMonster.bind(self, 3))
         });
         control4.addEventListener('touchend', function() {
-            self.aotu.hit(() => {
-                self.killMonster(4);
-            })
+            self.aotu.hit(self.killMonster.bind(self, 4))
         });
         this.aotu = new Aotuman();
         page.appendChild(this.aotu.render());
@@ -427,7 +419,7 @@ export default class Stage {
         for (let i = 0; i < this.monsters.length; i++) {
             // 杀死第一个状态是 walk 的对应颜色的怪兽
             if (this.monsters[i].stateType == 'walk' && this.monsters[i].type == num) {
-                this.monsters[i].die();
+                this.monsters[i].hit();
                 // 渲染子弹
                 this.renderBullet([this.monsters[i].left, this.monsters[i].bottom]);
                 flag = true;
@@ -450,7 +442,7 @@ export default class Stage {
         let flag = false; // 是否有怪兽被击倒
         for (let i = 0; i < this.monsters.length; i++) {
             if (this.monsters[i].stateType == 'walk') {
-                this.monsters[i].die();
+                this.monsters[i].hit();
                 this.renderBullet([this.monsters[i].left, this.monsters[i].bottom]);
                 flag = true;
                 break;
