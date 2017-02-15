@@ -78,15 +78,15 @@ export default class Stage {
             startIcon = document.createElement('div'),
             startBtn = document.createElement('div');
         page.className = 'page-1';
-        startIcon.className = 'start-icon';
-        startBtn.className = 'start-btn';
+        startIcon.className = 'start-icon moveFromTop';
+        startBtn.className = 'start-btn moveFromBottom';
         // 给开始游戏按钮绑定跳转到渲染游戏页面的方法
         startBtn.addEventListener('touchend', function() {
             this.play();
         }.bind(this));
         page.appendChild(startIcon);
         // 在icon动画结束之后startbtn进入
-        page.appendChild(startBtn);
+        setTimeout(page.appendChild.bind(page, startBtn), 700);
         stage.appendChild(page);
     }
 
@@ -316,23 +316,25 @@ export default class Stage {
             restart = document.createElement('div'),
             share = document.createElement('div');
         page.className = 'page-3';
-        grass.className = 'grass';
+        grass.className = 'grass moveFromBottom';
         aotuman.className = 'aotuman';
         scoreBoard.className = 'score-board';
         score.className = 'score';
         highestScoreDOM.className = 'highest-score';
-        restart.className = 'restart';
+        restart.className = 'restart moveFromBottom';
+        share.className = 'share moveFromBottom';
         restart.addEventListener('touchend', function() {
             this.start();
         }.bind(this));
-        share.className = 'share';
         page.appendChild(aotuman);
         scoreBoard.appendChild(score);
         scoreBoard.appendChild(highestScoreDOM);
         page.appendChild(scoreBoard);
         page.appendChild(grass);
-        page.appendChild(restart);
-        page.appendChild(share);
+        setTimeout(function() {
+            page.appendChild(restart);
+            page.appendChild(share);
+        }, 600);
         stage.appendChild(page);
         this.renderScore(this.score);
         let highestScore = Cookie.prototype.getCookie('hs');
