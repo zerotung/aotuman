@@ -8,8 +8,6 @@ export default class Stage {
 
     constructor() {
         this.init();
-        // this.state = 'loading';
-        this.interval = null;
         this.powerInter = null;
         this.monsters = [];
         this.aotu = new Aotuman();
@@ -47,42 +45,30 @@ export default class Stage {
         stage.appendChild(page);
     }
 
-    loading(percent = 1) {
-        // <div class="page-0" style="display: none;">
-        //     <div class="aotuman"></div>
-        //     <div class="grass1"></div>
-        //     <div class="grass2"></div>
-        //     <div class="loading">
-        //         <div class="number"></div>
-        //         <div class="icon"></div>
-        //     </div>
-        // </div>
-        if (percent == 1) {
-            this.start();
-            // this.end();
+    /**
+     * 加载时显示加载进度的回调函数
+     * @param  {Number} already 已加载的数量
+     * @param  {Number} all     总共需要加载的数量
+     */
+    loading([already, all] = [1, 1]) {
 
-            console.log('finished');
-        } else {
-
-            this.renderLoading(Math.floor(percent[0] * 100 / percent[1]));
-        }
-
-    }
-
-    renderLoading(num) {
         let number1DOM = document.getElementsByClassName('number1')[0],
             number2DOM = document.getElementsByClassName('number2')[0],
+            num = Math.floor(already * 100 / all),
             num1 = Math.floor(num / 10),
             num2 = num % 10;
-        number1DOM.style.backgroundPosition = -33 * num1 + 'px 0';
-        number2DOM.style.backgroundPosition = -33 * num2 + 'px 0';
+
+        if (already / all == 1) {
+            this.start();
+            console.log('finished');
+        } else {
+            number1DOM.style.backgroundPosition = -33 * num1 + 'px 0';
+            number2DOM.style.backgroundPosition = -33 * num2 + 'px 0';
+        }
     }
 
+    /** 去掉stage中所有div 在stage中渲染开始游戏页面 */
     start() {
-        // <div class="page-1" style="display: none;">
-        //     <div class="start-icon"></div>
-        //     <div class="start-btn"></div>
-        // </div>
 
         let stage = document.getElementsByClassName('stage')[0];
         if (stage.getElementsByTagName('div')[0]) {
@@ -94,65 +80,52 @@ export default class Stage {
         page.className = 'page-1';
         startIcon.className = 'start-icon';
         startBtn.className = 'start-btn';
+        // 给开始游戏按钮绑定跳转到渲染游戏页面的方法
         startBtn.addEventListener('touchend', function() {
             this.play();
         }.bind(this));
         page.appendChild(startIcon);
+        // 在icon动画结束之后startbtn进入
         page.appendChild(startBtn);
         stage.appendChild(page);
     }
 
+    /** 渲染游戏页面 并在3秒之后开始生成怪兽 */
     play() {
-        // <div class="page-2">
-        //     <div class="aotuman"></div>
-        //     <div class="topbar">
-        //         <div class="power-slot"></div>
-        //         <div class="power-fill"></div>
-        //         <div class="mons-icon"></div>
-        //         <div class="x"></div>
-        //     </div>
-        //     <div class="mons-stage">
-        //     </div>
-        //     <div class="control">
-        //         <div class="control-1"></div>
-        //         <div class="control-2"></div>
-        //         <div class="control-3"></div>
-        //         <div class="control-4"></div>
-        //     </div>
-        // </div>
+        // 对新一局游戏进行初始化
         this.playInit();
-
         setTimeout(function() {
+            // 开始下一难度的游戏
             this.playStart();
         }.bind(this), 3000);
-        // this.interval = setInterval(function() {
-        // let monster = new Monster();
-        // this.monsters.push(monster);
-        // document.getElementsByClassName('mons-stage')[0].appendChild(monster.render());
-        // }.bind(this), 50);
-        // 
-
     }
 
+    /** 根据Level中的预设以及算法 自动生成怪兽生成的间隔时间 */
     playStart() {
+        // 关卡难度增加
         this.level += 1;
-        // this.renderLevel(this.level);
+        // 将生成怪兽的算法作为回调函数传入play方法中
+        // 预设时间间隔后调用传入函数
         this.levelObj.play(this.level, this.appendMonster.bind(this));
 
+        // 使怪兽行走的interval
         this.monsterInterval = setInterval(function() {
             this.renderMonster();
+            // 若有一个怪兽离屏幕左侧小于300px时
             if (this.monsters.some(function(monster) {
                     return (monster.left < 300 && monster.stateType == 'walk');
                 })) {
-                clearInterval(this.interval);
+                // 清除怪物行走的interval
                 clearInterval(this.monsterInterval);
+                // 进入结束页面
                 this.end();
             }
+            // 根据游戏难度调整怪兽走动的速度
         }.bind(this), 600 / (this.level + 5));
     }
 
+    /** 初始化游戏页面 */
     playInit() {
-        this.monsters = [];
         let stage = document.getElementsByClassName('stage')[0];
         if (stage.getElementsByTagName('div')[0]) {
             stage.removeChild(stage.getElementsByTagName('div')[0]);
@@ -189,24 +162,16 @@ export default class Stage {
         control4.className = "key control-4";
         let self = this;
         control1.addEventListener('touchend', function() {
-            self.aotu.hit(() => {
-                self.killMonster(1);
-            })
+            self.aotu.hit(self.killMonster.bind(self, 1))
         });
         control2.addEventListener('touchend', function() {
-            self.aotu.hit(() => {
-                self.killMonster(2);
-            })
+            self.aotu.hit(self.killMonster.bind(self, 2))
         });
         control3.addEventListener('touchend', function() {
-            self.aotu.hit(() => {
-                self.killMonster(3);
-            })
+            self.aotu.hit(self.killMonster.bind(self, 3))
         });
         control4.addEventListener('touchend', function() {
-            self.aotu.hit(() => {
-                self.killMonster(4);
-            })
+            self.aotu.hit(self.killMonster.bind(self, 4))
         });
         this.aotu = new Aotuman();
         page.appendChild(this.aotu.render());
@@ -225,17 +190,19 @@ export default class Stage {
         control.appendChild(control4);
         page.appendChild(control);
         stage.appendChild(page);
+        // 清空怪兽列表
+        this.monsters = [];
+        // 清空分数
         this.score = 0;
         this.renderGameScore(this.score);
+        // 清空等级
         this.level = 0;
         this.renderLevel(this.level);
-        // this.power = 0;
-        // this.power = 90;
+        // 清空能量
         this.renderPower(this.aotu.power);
-        // this.startT = new Date().getTime();
-        // console.log(this.startT);
     }
 
+    /** 在舞台中新渲染一个怪兽 */
     appendMonster() {
         let monsStage = document.getElementsByClassName('mons-stage')[0];
         if (monsStage) {
@@ -247,13 +214,21 @@ export default class Stage {
         return false;
     }
 
+    /**
+     * 在游戏页显示当前获得的分数
+     * @param  {number} num 需要显示的游戏得分
+     */
     renderGameScore(num) {
         let scoreDOM = document.getElementsByClassName('score')[0];
+        // 清空scoreDOM中的全部子DOM
         while (scoreDOM.hasChildNodes()) {
             scoreDOM.removeChild(scoreDOM.lastChild);
         }
+        // 将 num 转换为 String
         let numArray = this.num2arr(num);
+        // 在数组最前面添加一个'x'
         numArray.unshift('x');
+        // 一次添加进对应的DOM
         numArray.forEach(function(number) {
             let num = document.createElement('div');
             num.className = 'NumGameScore-' + number;
@@ -261,14 +236,24 @@ export default class Stage {
         })
     }
 
+    /**
+     * 渲染修改能量条的长度
+     * @param  {Number} power 需要渲染的能量
+     */
     renderPower(power) {
         let powerFillDOM = document.getElementsByClassName('power-fill')[0];
+        // 针对不同浏览器添加前缀
         let browsers = ['transform', 'msTransform', 'mozTransform', 'webkitTransform', 'oTransform'];
         browsers.forEach(x => {
             powerFillDOM.style[x] = 'scaleX(' + power / 100 + ')';
         })
     }
 
+    /**
+     * 将传入的多位数字转为字符数组返回
+     * @param  {number} num 需要转换的数
+     * @return {Array}      正序的数字数组
+     */
     num2arr(num) {
         let numArray = [];
         do {
@@ -278,6 +263,10 @@ export default class Stage {
         return numArray.reverse();
     }
 
+    /**
+     * 在结算页显示最终获得的分数
+     * @param  {number} num 需要渲染的结算页分数
+     */
     renderScore(num) {
         let numArray = [];
         let scoreDOM = document.getElementsByClassName('score')[0];
@@ -292,7 +281,12 @@ export default class Stage {
         })
     }
 
+    /**
+     * 在结算页显示获得过的最高分
+     * @param  {Number} num 需要渲染的最高分
+     */
     renderHighestScore(num) {
+
         let numArray = [];
         let highestScoreDOM = document.getElementsByClassName('highest-score')[0];
         while (highestScoreDOM.hasChildNodes()) {
@@ -306,15 +300,9 @@ export default class Stage {
         })
     }
 
+    /** 渲染结算页的画面 */
     end() {
 
-        // <div className="page-3">
-        //     <div className="aotuman"></div>
-        //     <div className="score-board"></div>
-        //     <div className="restart"></div>
-        //     <div className="share"></div>
-        //     <div className="grass"></div>
-        // </div>
         let stage = document.getElementsByClassName('stage')[0];
         if (stage.getElementsByTagName('div')[0]) {
             stage.removeChild(stage.getElementsByTagName('div')[0]);
@@ -355,6 +343,10 @@ export default class Stage {
         this.renderHighestScore(highestScore);
     }
 
+    /**
+     * 渲染一颗子弹
+     * @param  {Array} position 最终位置
+     */
     renderBullet(position) {
         let bullet = new Bullet(position);
         let monsStage = document.getElementsByClassName("mons-stage")[0];
@@ -366,53 +358,70 @@ export default class Stage {
         }, 110);
     }
 
+    /** 检查当前关卡是否结束 */
     renderMonster() {
         let monsStage = document.getElementsByClassName("mons-stage")[0];
-        this.monsters.forEach(function(monster) {
-            monster.next();
-        })
         this.monsters = this.monsters.filter(function(monster) {
+            monster.next();
             let flag = monster.stateType == 'died';
             if (flag) {
                 monsStage.removeChild(monster.render());
             }
             return !(monster.stateType == 'died');
-        })
+        });
+        // 如果当前生存的怪物数量为0且当前关卡的怪物已生成完
         if (this.monsters.length == 0 && this.levelObj.levelClear == true) {
+            // 清空怪兽移动的interval
             clearInterval(this.monsterInterval);
-            console.log('level: ' + (this.level + 1));
+            // 显示进入下一关的动画
             this.renderLevel(this.level);
+            // 在3秒后进入下一关
             setTimeout(this.playStart.bind(this), 3000);
         }
     }
 
+    /**
+     * 渲染提示下一关的动画
+     * @param  {Number} num 关卡数
+     */
     renderLevel(num) {
+        // 清空lvlDOM里所有的子DOM
         let lvlDOM = document.getElementsByClassName('lvl')[0];
         while (lvlDOM.hasChildNodes()) {
             lvlDOM.removeChild(lvlDOM.lastChild);
         }
         let lvlArray = this.num2arr(num + 1);
+        // 渲染关卡数
         lvlArray.forEach(x => {
             let lvl = document.createElement('div');
             lvl.className = 'lvl-num lvl-num-' + x;
             lvlDOM.appendChild(lvl);
         });
+        // show绑定了对应的animation
         lvlDOM.className = 'lvl show';
+        // 在2秒后动画结束 去掉show类
         setTimeout(function() {
             lvlDOM.className = 'lvl'
         }, 2000);
     }
 
+    /**
+     * 杀死对应类型的怪兽
+     * @param  {Number} num 怪兽的类型编号
+     */
     killMonster(num) {
         let flag = false; // 是否有怪兽被击倒
         for (let i = 0; i < this.monsters.length; i++) {
+            // 杀死第一个状态是 walk 的对应颜色的怪兽
             if (this.monsters[i].stateType == 'walk' && this.monsters[i].type == num) {
                 this.monsters[i].die();
+                // 渲染子弹
                 this.renderBullet([this.monsters[i].left, this.monsters[i].bottom]);
                 flag = true;
                 break;
             }
         }
+        // 如果有怪兽被击中
         if (flag) {
             this.score += 1;
             this.renderGameScore(this.score);
@@ -422,6 +431,7 @@ export default class Stage {
         }
     }
 
+    /** 击杀第一个怪兽 */
     killFirstMonster() {
         let flag = false; // 是否有怪兽被击倒
         for (let i = 0; i < this.monsters.length; i++) {
@@ -438,8 +448,10 @@ export default class Stage {
         }
     }
 
+    /** 爆能时的动画渲染 */
     powerFull() {
-        const SUPER_TIME = 5000;
+
+        const SUPER_TIME = 5000; // 超级煎蛋时间持续时长
         let powerFillDOM = document.getElementsByClassName('power-fill')[0],
             powerSlotDOM = document.getElementsByClassName('power-slot')[0],
             page = document.getElementsByClassName('page-2')[0];
@@ -453,17 +465,22 @@ export default class Stage {
         strikeBoardDOM.addEventListener('touchend', function() {
             this.aotu.hit(this.killFirstMonster.bind(this));
         }.bind(this));
+        // 点击按钮进入超级煎蛋模式
         superStrikeDOM.addEventListener('touchend', function() {
+            // 去掉闪烁
             clearInterval(this.powerInter);
             powerSlotDOM.className = 'power-slot';
             powerFillDOM.className = 'power-fill';
             superStrikeDOM.className = 'super-strike';
+            // 奥特曼进入超级状态
             this.aotu.superMode();
             this.renderPower(0);
+            // 为能量条添加动效类名
             powerFillDOM.className = powerFillClassName + ' decreace';
             page.appendChild(strikeBoardDOM);
             page.appendChild(superLightDOM);
             page.removeChild(superStrikeDOM);
+            // 在super time结束后将各个DOM恢复
             setTimeout(function() {
                 powerFillDOM.className = 'power-fill';
                 page.removeChild(strikeBoardDOM);
@@ -473,6 +490,7 @@ export default class Stage {
         }.bind(this));
         page.appendChild(superStrikeDOM);
 
+        // 控制闪烁的interval
         this.powerInter = setInterval(function() {
             if (powerFillDOM.className == 'power-fill') {
                 powerFillDOM.className = 'full power-fill';
