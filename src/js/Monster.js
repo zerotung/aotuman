@@ -1,11 +1,13 @@
 export default class Monster {
 
-    constructor() {
-
+    constructor(stage, level) {
+        this.speed = 9 + level;
+        this.stage = stage;
         this.pic = document.createElement('div');
         this.type = Math.ceil(Math.random() * 4);
         this.state = 1;
         this.stateType = 'walk';
+        this.moveInterval = null;
         this.left = 1136;
         this.bottom = Math.floor(Math.random() * 220 + 130);
         this.init();
@@ -35,6 +37,7 @@ export default class Monster {
 
     died() {
         this.stateType = 'died';
+        this.stage.removeChild(this.pic);
     }
 
     next() {
@@ -48,7 +51,7 @@ export default class Monster {
         } else {
             return;
         }
-        this.left -= 10;
+        this.left -= this.speed;
         this.pic.className = 'mons mons' + state;
         if (this.state < 9) {
             style.left = this.left + "px";
@@ -56,6 +59,7 @@ export default class Monster {
     }
 
     render() {
-        return this.pic;
+        this.stage.appendChild(this.pic);
+        this.moveInterval = setInterval(this.next.bind(this), 100);
     }
 }

@@ -1,3 +1,5 @@
+$deviceW: 1136px;
+$deviceH: 560;
 body,
 html {
     width: 100%;
@@ -16,6 +18,22 @@ html {
     25% {right: 40%;top: 40%; transform: scale(3);}
     50% {right: 40%;top: 40%; transform: scale(3);}
     100% {right: 100px; top: 20px; transform: scale(1);}
+}
+
+@keyframes moveFromTop {
+    from { transform: translateY(-100%); }
+}
+
+@keyframes moveFromBottom {
+    from { transform: translateY(100%); }
+}
+
+.moveFromTop {
+    animation: moveFromTop .6s ease both;
+}
+
+.moveFromBottom {
+    animation: moveFromBottom .6s ease both;
 }
 
 .stage {
@@ -106,25 +124,29 @@ html {
     $starticon-height: 391px;
     $startbtn-width: 298px;
     $startbtn-height: 118px;
+
     .start-icon {
         width: #{$starticon-width};
         height: #{$starticon-height};
         background-image: url("StartIcon.png");
         position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(#{-$starticon-width/2},
-        #{-$starticon-height/2 - 70px});
+        left: #{($deviceW - $starticon-width)/2};
+        top: #{($deviceH - $starticon-height)/2-70px};
+        // transform: translate(#{-$starticon-width/2},
+        // #{-$starticon-height/2 - 70px});
     }
     .start-btn {
         width: #{$startbtn-width};
         height: #{$startbtn-height};
         background-image: url("StartBtn.png");
         position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(#{-$startbtn-width/2},
-        #{-$startbtn-height/2 + $starticon-height/2});
+
+        left: #{($deviceW - $startbtn-width)/2};
+        top: #{($deviceH - $startbtn-height)/2 + $starticon-height/2};
+        // left: 50%;
+        // top: 50%;
+        // transform: translate(#{-$startbtn-width/2},
+        // #{-$startbtn-height/2 + $starticon-height/2});
         &:hover {
             background: url("StartBtn.png") no-repeat -0px -118px;
         }
@@ -698,11 +720,11 @@ html {
         top: 30px;
         .score {
             position: absolute;
-            width: 980px;
+            width: 93*4px;
             height: 100px;
             line-height: 100px;
             top: 220px;
-            right: 110px;
+            right: 105px;
             text-align: right;
             $numscore-width: 93px;
             .NumScore {
