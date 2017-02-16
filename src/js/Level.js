@@ -1,10 +1,9 @@
 export default class Level {
+
     constructor() {
-        this.index = 0;
-        this.levelClear = false;
-        this.level = [
-            // [1023, 2403, 3042, 3592, 4609, 4630, 5292, 5604, 6032, 7230, 8271, 8792, 9230, 11029, 11643, 12032],
-            // [1023, 2403, 3042, 3592, 4609, 4630, 5292, 5604, 6032, 7230, 8271, 8792, 9230, 11029, 11643, 12032]
+        this.index = 0; // 当前生成怪兽的指针
+        this.levelClear = false; // 当前关卡的怪兽是否全部添加
+        this.level = [ // 关卡每个怪兽生成的间隔时间
             [3031, 2028, 1623, 112, 1823, 1291, 1103, 823, 231, 1212, 112, 1130, 124, 1503, 623, 412, 123, 1102],
             [2589, 1732, 1230, 279, 1323, 188, 1523, 991, 803, 523, 1720, 981, 643, 536, 186, 805, 267, 708, 36, 1024, 509, 276, 233, 960],
             [2657, 1608, 1404, 118, 188, 1523, 991, 803, 523, 1045, 803, 523, 981, 643, 536, 186, 805, 834, 187, 219, 814, 216, 595, 44, 1092, 94, 322, 17, 826],
@@ -13,7 +12,12 @@ export default class Level {
         ];
     }
 
-    play(level, callback) {
+    /**
+     * 开始生成怪兽
+     * @param  {Number}   level         当前关卡难度
+     * @param  {Function} appendMonster 添加怪兽的回调函数
+     */
+    play(level, appendMonster) {
         if (this.level.length < level) {
             this.appendLevel(level);
         }
@@ -23,33 +27,46 @@ export default class Level {
         let magn = total / (4500 + 3500 * (level + 2));
         this.level[level - 1] = this.level[level - 1].map(x => Math.floor(x / magn));
         console.log(this.level[level - 1].reduce((x, y) => x + y));
-        this.wrapTimeout(level, callback);
+        this.wrapTimeout(level, appendMonster);
     }
 
-    wrapTimeout(level, callback) {
+    /**
+     * 以level属性数组中的数字设置生成怪兽的间隔时间
+     * @param  {Number}   level         当前关卡数
+     * @param  {Function} appendMonster 添加怪兽的回调函数
+     */
+    wrapTimeout(level, appendMonster) {
 
         if (this.index < this.level[level - 1].length) {
-            if (callback()) {
+            if (appendMonster()) {
                 let waitTime = this.level[level - 1][this.index++] + Math.floor(Math.random() * 100) - 50;
-                setTimeout(this.wrapTimeout.bind(this, level, callback), waitTime);
+                setTimeout(this.wrapTimeout.bind(this, level, appendMonster), waitTime);
             }
         } else {
             this.levelClear = true;
         }
     }
 
+    /**
+     * 添加新的关卡(无限关卡)
+     * @param  {Number} level 需要添加的关卡难度
+     */
     appendLevel(level) {
+        // 取当前level前2和前5进行组合
         let levelNow = this.level[level - 2],
             levelBefore = this.level[level - 5],
             levelNew = [];
         // length = levelNow.length - levelBefore;
         for (var i = 0; i < levelNow.length; i++) {
+            // 在新的数组中压入前2的一个元素
             levelNew.push(levelNow[i]);
+            // 如果前5还有元素
             if (levelBefore[i]) {
+                // 前5对应位置的元素减去前2的取绝对值压入新数组
                 levelNew.push(Math.abs(levelNow[i] - levelBefore[i]))
             }
         }
+        // 在整个level数组中压入新的level数组
         this.level.push(levelNew);
     }
-
 }
