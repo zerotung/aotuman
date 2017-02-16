@@ -1,5 +1,3 @@
-// import Aotuman from './Aotuman.js';
-// import Monster from './Monster.js';
 import Stage from './Stage.js';
 import Pre from './Pre.js';
 
@@ -9,9 +7,6 @@ let stage = new Stage();
 document.getElementsByClassName('stage')[0].addEventListener('touchmove', function(e) {
     e.preventDefault();
 });
-
-// let aotu = new Aotulman();
-// let monsters = [];
 
 // 等待加载页的图片加载完后加载其他图片
 window.onload = function() {
@@ -45,11 +40,3 @@ window.onload = function() {
     );
     preload.preload(stage.loading.bind(stage), stage.loading.bind(stage));
 }
-
-// var monster = new Monster();
-// var monsterInterval = setInterval(function() {
-//     document.getElementsByClassName("mons-stage")[0].appendChild(monster.render());
-// }, 100);
-
-// var aotu = new Aotuman();
-// document.querySelector(".page-2 .aotuman").appendChild(aotu.render());

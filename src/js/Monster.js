@@ -21,10 +21,6 @@ export default class Monster {
         style.bottom = this.bottom + "px";
     }
 
-    walk() {
-        this.state = this.state >= 4 ? 1 : this.state + 1;
-    }
-
     die() {
         this.stateType = 'die';
         this.state = this.state < 5 ? 5 : this.state + 1;
@@ -42,7 +38,7 @@ export default class Monster {
         let state = this.type + "-" + ((this.state < 9) ? this.state : 8);
         let style = this.pic.style;
         if (this.stateType == 'walk') {
-            this.walk();
+            this.state = this.state >= 4 ? 1 : this.state + 1;
         } else if (this.stateType == 'die') {
             this.die();
         } else {

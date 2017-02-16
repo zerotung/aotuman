@@ -12,10 +12,6 @@ export default class Aotuman {
         this.bulletCache = [];
         this.startT = 0;
         this.power = 0;
-        this.init();
-    }
-
-    init() {
         this.next();
     }
 
