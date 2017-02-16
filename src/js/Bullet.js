@@ -2,14 +2,18 @@ export default class Bullet {
 
     /**
      * 创建子弹的DOM和开始结束位置
-     * @param  {Number} [endX 结束的横坐标
-     * @param  {Number} endY] 结束的纵坐标
+     * @param  {Number} [endX 结束的横坐标(相对左)
+     * @param  {Number} endY] 结束的纵坐标(相对底)
      */
     constructor([endX, endY] = endPos) {
-        this.end = [endX, 400 - endY];
+        // 获取屏幕可视区域高度
+        let stageH = document.body.clientHeight;
+        // 结束点(相对顶)=屏幕高度-相对底部的高度-怪兽高度+偏差
+        this.end = [endX, stageH - endY - 196 + 10];
+        // 凹凸曼出手位置
         this.start = [280, 250];
+        // 新建DOM结构
         this.img = document.createElement('div');
-        // this.img.src = 'static/Bullet.png';
         this.img.className = 'bullet';
     }
 
