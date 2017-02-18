@@ -135,12 +135,12 @@ html {
     .start-btn {
         width: #{$startbtn-width};
         height: #{$startbtn-height};
-        background-image: url("StartBtn.png");
+        background: url("StartBtn.png") no-repeat -0px -118px;
         position: absolute;
         left: #{($deviceW - $startbtn-width)/2};
         top: #{($deviceH - $startbtn-height)/2 + $starticon-height/2};
         &:hover {
-            background: url("StartBtn.png") no-repeat -0px -118px;
+            background-position: 0 0;
         }
     }
 }

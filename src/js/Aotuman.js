@@ -120,15 +120,16 @@ export default class Aotuman {
     /** 进入super模式 */
     superMode() {
         let self = this;
-
+        self.shooting = true;
         setTimeout(function() {
             self.next(4, 1);
             setTimeout(function() {
                 self.next(4, 2);
                 // 在动画结束后改为super模式
+                self.shooting = false;
                 self.super = true;
-            }, 200);
-        }, 200)
+            }, 120);
+        }, 120)
     }
 
     /** 退出super模式 */
