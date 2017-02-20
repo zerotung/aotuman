@@ -9,23 +9,63 @@ html {
 }
 
 @keyframes superlight {
-    from {transform: rotate(1deg);}
-    to {transform: rotate(360deg);}
+    from {
+        transform: rotate(1deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 @keyframes showlvl {
-    0% {right: 40%;top: 40%; transform: scale(0);}
-    25% {right: 40%;top: 40%; transform: scale(3);}
-    50% {right: 40%;top: 40%; transform: scale(3);}
-    100% {right: 100px; top: 20px; transform: scale(1);}
+    0% {
+        right: 40%;
+        top: 40%;
+        transform: scale(0);
+    }
+    25% {
+        right: 40%;
+        top: 40%;
+        transform: scale(3);
+    }
+    50% {
+        right: 40%;
+        top: 40%;
+        transform: scale(3);
+    }
+    100% {
+        right: 100px;
+        top: 20px;
+        transform: scale(1);
+    }
 }
 
 @keyframes moveFromTop {
-    from { transform: translateY(-100%); }
+    from {
+        transform: translateY(-100%);
+    }
 }
 
 @keyframes moveFromBottom {
-    from { transform: translateY(100%); }
+    from {
+        transform: translateY(100%);
+    }
+}
+
+@keyframes showRank2 {
+    from {
+        transform: translateY(-100%);
+    }
+}
+@keyframes showRank3 {
+    from {
+        transform: translateY(-200%);
+    }
+}
+@keyframes showRank4 {
+    from {
+        transform: translateY(-300%);
+    }
 }
 
 .moveFromTop {
@@ -101,7 +141,7 @@ html {
         #{-$loading-height/2 + $aotuman-height/2});
         .number1,
         .number2 {
-            width: 33px;
+            width: 32px;
             height: 35px;
             display: inline-block;
             background-image: url("NumLoading.png")
@@ -154,7 +194,6 @@ html {
     background-attachment: fixed;
     position: relative;
     .aotuman {
-
         width: 262px;
         height: 290px;
         z-index: 500;
@@ -800,7 +839,6 @@ html {
             .HighestScore-9 {
                 background-position: #{-$highestscore-width*9} 0px;
             }
-
         }
     }
     .restart {
@@ -820,5 +858,173 @@ html {
         position: absolute;
         right: 140px;
         bottom: 20px;
+    }
+}
+
+.page-4 {
+    width: 100%;
+    height: 100%;
+    background-color: #FEFFEF;
+    position: relative;
+    $boardW: 646px;
+    $boardH: 480px;
+    $grass2-width: 1136px;
+    $grass2-height: 261px;
+    $startbtn-width: 298px;
+    $startbtn-height: 118px;
+    $aotuman-width: 197px;
+    $aotuman-height: 256px;
+    .board {
+        width: #{$boardW};
+        height: #{$boardH};
+        background: url("RankList.png");
+        background-size: #{$boardW} #{$boardH};
+        background-repeat: no-repeat;
+        position: absolute;
+        left: 50px;
+        top: 30px;
+        z-index: 100;
+        .rank {
+            width: 560px;
+            height: 70px;
+            background: #fff;
+            margin: 10px auto;
+            border-radius: 20px;
+            box-sizing: border-box;
+            box-shadow: 0 5px 0 #9B412B;
+            padding: 3px;
+            animation: showRank 1s;
+            &:first-child {
+                background: #F9FF80;
+                margin-top: 110px;
+            }
+            .rank-item {
+                display: inline-block;
+                float: left;
+            }
+            .rank-img {
+                width: 79px;
+                height: 64px;
+                margin-left: 25px;
+            }
+            &.rank1 {
+                z-index: 4;
+                position: relative;
+                .rank-img {
+                    background: url("Rank1.png");
+                }
+            }
+            &.rank2 {
+                z-index: 3;
+                position: relative;
+                animation: showRank2 0.5s;
+                .rank-img {
+                    background: url("Rank2.png");
+                }
+            }
+            &.rank3 {
+                z-index: 2;
+                position: relative;
+                animation: showRank3 1s;
+                .rank-img {
+                    background: url("Rank3.png");
+                }
+            }
+            &.rank4 {
+                z-index: 1;
+                position: relative;
+                animation: showRank4 1.5s;
+            }
+            .head-img {
+                width: 56px;
+                height: 56px;
+                background: url("User.png") no-repeat;
+                background-size: 100% 100%;
+                border-radius: 10px;
+                margin-left: 10px;
+                margin-top: 4px;
+            }
+            .name {
+                width: 230px;
+                height: 64px;
+                line-height: 64px;
+                font-size: 36px;
+                color: #523B0D;
+                font-weight: 800;
+                margin-left: 5px;
+            }
+            .score {
+                width: 132px;
+                height: 35px;
+                line-height: 60px;
+                margin-left: 2px;
+                margin-top: 14.5px;
+                .rank-score {
+                    width: 32px;
+                    height: 35px;
+                    display: inline-block;
+                    background-image: url("NumLoading.png");
+                    &.rank-score0 {
+                        background-position: -0px 0;
+                    }
+                    &.rank-score1 {
+                        background-position: -33px 0;
+                    }
+                    &.rank-score2 {
+                        background-position: -66px 0;
+                    }
+                    &.rank-score3 {
+                        background-position: -99px 0;
+                    }
+                    &.rank-score4 {
+                        background-position: -132px 0;
+                    }
+                    &.rank-score5 {
+                        background-position: -165px 0;
+                    }
+                    &.rank-score6 {
+                        background-position: -198px 0;
+                    }
+                    &.rank-score7 {
+                        background-position: -231px 0;
+                    }
+                    &.rank-score8 {
+                        background-position: -264px 0;
+                    }
+                    &.rank-score9 {
+                        background-position: -297px 0;
+                    }
+                }
+            }
+        }
+    }
+    .grass {
+        width: #{$grass2-width};
+        height: #{$grass2-height};
+        background-image: url("Grass2.png");
+        background-repeat: no-repeat;
+        background-size: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+    .start-btn {
+        width: #{$startbtn-width};
+        height: #{$startbtn-height};
+        background: url("StartBtn.png") no-repeat -0px -118px;
+        position: absolute;
+        right: 100px;
+        bottom: 70px;
+        &:hover {
+            background-position: 0 0;
+        }
+    }
+    .aotuman {
+        width: #{$aotuman-width};
+        height: #{$aotuman-height};
+        background-image: url("Man1.png");
+        position: absolute;
+        right: 130px;
+        top: 90px;
     }
 }

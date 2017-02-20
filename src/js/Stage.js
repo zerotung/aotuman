@@ -326,6 +326,9 @@ export default class Stage {
         restart.addEventListener('touchend', function() {
             this.start();
         }.bind(this));
+        share.addEventListener('touchend', function() {
+            this.sharePage();
+        }.bind(this));
         page.appendChild(aotuman);
         scoreBoard.appendChild(score);
         scoreBoard.appendChild(highestScoreDOM);
@@ -510,5 +513,81 @@ export default class Stage {
                 superStrikeDOM.className = 'super-strike';
             }
         }, 100);
+    }
+
+    sharePage() {
+        let stage = document.getElementsByClassName('stage')[0];
+        if (stage.getElementsByTagName('div')[0]) {
+            stage.removeChild(stage.getElementsByTagName('div')[0]);
+        }
+        let page = document.createElement('div'),
+            board = document.createElement('div'),
+            aotuman = document.createElement('div'),
+            grass = document.createElement('div'),
+            rank1 = document.createElement('div'),
+            rank2 = document.createElement('div'),
+            rank3 = document.createElement('div'),
+            rank4 = document.createElement('div'),
+            startBtn = document.createElement('div');
+        page.className = 'page-4';
+        board.className = 'board';
+        aotuman.className = 'aotuman';
+        grass.className = 'grass';
+        rank1.className = 'rank1 rank';
+        rank2.className = 'rank2 rank';
+        rank3.className = 'rank3 rank';
+        rank4.className = 'rank4 rank';
+        startBtn.className = 'start-btn';
+        stage.appendChild(page);
+        page.appendChild(board);
+        page.appendChild(aotuman);
+        page.appendChild(grass);
+        board.appendChild(rank1);
+        board.appendChild(rank2);
+        board.appendChild(rank3);
+        board.appendChild(rank4);
+        page.appendChild(startBtn);
+        let dataJson = [{
+            "headImg": "test.jpg",
+            "name": "Zero",
+            "score": "1231"
+        }, {
+            "headImg": "test.jpg",
+            "name": "忘了爱",
+            "score": "1232"
+        }, {
+            "headImg": "test.jpg",
+            "name": "小贞贞",
+            "score": "1233"
+        }, {
+            "headImg": "test.jpg",
+            "name": "Chen",
+            "score": "1234"
+        }];
+        this.appendRank([rank1, rank2, rank3, rank4], dataJson);
+    }
+
+    appendRank(stage, json) {
+        for (let i = 0; i < 4; i++) {
+            let rankImg = document.createElement('div'),
+                headImg = document.createElement('div'),
+                name = document.createElement('div'),
+                score = document.createElement('div');
+            rankImg.className = 'rank-img rank-item';
+            headImg.className = 'head-img rank-item';
+            name.className = 'name rank-item';
+            score.className = 'score rank-item';
+            stage[i].appendChild(rankImg);
+            stage[i].appendChild(headImg);
+            stage[i].appendChild(name);
+            stage[i].appendChild(score);
+            name.innerHTML = json[i].name;
+            let scoreArr = this.num2arr(json[i].score);
+            for (let i = 0; i < scoreArr.length; i++) {
+                let num = document.createElement('div');
+                num.className = 'rank-score rank-score' + scoreArr[i];
+                score.appendChild(num);
+            }
+        }
     }
 }
