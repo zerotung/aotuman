@@ -537,7 +537,10 @@ export default class Stage {
         rank2.className = 'rank2 rank';
         rank3.className = 'rank3 rank';
         rank4.className = 'rank4 rank';
-        startBtn.className = 'start-btn';
+        startBtn.className = 'start-btn moveFromBottom';
+        startBtn.addEventListener('touchend', function() {
+            this.play();
+        }.bind(this));
         stage.appendChild(page);
         page.appendChild(board);
         page.appendChild(aotuman);
@@ -546,7 +549,7 @@ export default class Stage {
         board.appendChild(rank2);
         board.appendChild(rank3);
         board.appendChild(rank4);
-        page.appendChild(startBtn);
+        setTimeout(page.appendChild.bind(page, startBtn), 1000);
         let dataJson = [{
             "headImg": "test.jpg",
             "name": "Zero",
@@ -554,15 +557,15 @@ export default class Stage {
         }, {
             "headImg": "test.jpg",
             "name": "忘了爱",
-            "score": "1232"
+            "score": "122"
         }, {
             "headImg": "test.jpg",
             "name": "小贞贞",
-            "score": "1233"
+            "score": "13"
         }, {
             "headImg": "test.jpg",
             "name": "Chen",
-            "score": "1234"
+            "score": "1"
         }];
         this.appendRank([rank1, rank2, rank3, rank4], dataJson);
     }
