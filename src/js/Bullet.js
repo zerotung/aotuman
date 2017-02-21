@@ -12,6 +12,9 @@ export default class Bullet {
         this.end = [endX, stageH - endY - 196 + 10];
         // 凹凸曼出手位置
         this.start = [280, 250];
+
+        this.angle = 360 * Math.atan((this.end[1] - this.start[1]) / (this.end[0] - this.start[0])) / (2 * Math.PI);
+        console.log(this.angle);
         // 新建DOM结构
         this.img = document.createElement('div');
         this.img.className = 'bullet';
@@ -26,6 +29,10 @@ export default class Bullet {
         style.position = 'absolute';
         style.left = this.start[0] + 'px';
         style.top = this.start[1] + 'px';
+        let browsers = ['transform', 'msTransform', 'mozTransform', 'webkitTransform', 'oTransform'];
+        browsers.forEach(function(browser) {
+            style[browser] = 'rotate(' + this.angle + 'deg)';
+        }.bind(this));
         return this.img;
     }
 

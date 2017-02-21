@@ -34,8 +34,16 @@ window.onload = function() {
             'static/Grass2.png',
             'static/Man2.png',
             'static/ScoreBoard.png',
+            'static/NumHighest.png',
+            'static/NumScore.png',
             'static/Restart.png',
             'static/Share.png',
+            // share page
+            'static/RankList.png',
+            'static/Rank1.png',
+            'static/Rank2.png',
+            'static/Rank3.png',
+            'static/User.png'
         ]
     );
     preload.preload(stage.loading.bind(stage), stage.loading.bind(stage));
