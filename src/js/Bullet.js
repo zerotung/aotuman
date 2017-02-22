@@ -12,7 +12,7 @@ export default class Bullet {
         this.end = [endX, stageH - endY - 196 + 10];
         // 凹凸曼出手位置
         this.start = [280, 250];
-
+        // 计算子弹旋转的角度
         this.angle = 360 * Math.atan((this.end[1] - this.start[1]) / (this.end[0] - this.start[0])) / (2 * Math.PI);
         console.log(this.angle);
         // 新建DOM结构
@@ -29,6 +29,7 @@ export default class Bullet {
         style.position = 'absolute';
         style.left = this.start[0] + 'px';
         style.top = this.start[1] + 'px';
+        // 通过transform:rotate将子弹旋转一定角度
         let browsers = ['transform', 'msTransform', 'mozTransform', 'webkitTransform', 'oTransform'];
         browsers.forEach(function(browser) {
             style[browser] = 'rotate(' + this.angle + 'deg)';
