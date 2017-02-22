@@ -121,7 +121,7 @@ export default class Stage {
                 this.end();
             }
             // 根据游戏难度调整怪兽走动的速度
-        }.bind(this), 600 / (this.level + 5));
+        }.bind(this), 100);
     }
 
     /** 初始化游戏页面 */
@@ -191,7 +191,8 @@ export default class Stage {
         page.appendChild(control);
         stage.appendChild(page);
         // 清空怪兽列表
-        this.monsters = [];
+        // this.monsters = [];
+        this.monsters.length = 0;
         // 清空分数
         this.score = 0;
         this.renderGameScore(this.score);
@@ -206,7 +207,7 @@ export default class Stage {
     appendMonster() {
         let monsStage = document.getElementsByClassName('mons-stage')[0];
         if (monsStage) {
-            let monster = new Monster();
+            let monster = new Monster(10 + this.level);
             this.monsters.push(monster);
             document.getElementsByClassName('mons-stage')[0].appendChild(monster.render());
             return true;

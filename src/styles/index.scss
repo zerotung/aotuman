@@ -57,11 +57,13 @@ html {
         transform: translateY(-100%);
     }
 }
+
 @keyframes showRank3 {
     from {
         transform: translateY(-200%);
     }
 }
+
 @keyframes showRank4 {
     from {
         transform: translateY(-300%);
@@ -436,171 +438,220 @@ html {
     .mons-stage {
         @at-root {
             .mons {
-                width: 216px;
-                height: 196px;
-                background: url("Monsters.png") no-repeat -434px -980px;
                 position: absolute;
                 left: 510px;
-                &.mons1-1 {
-                    width: 216px;
-                    height: 196px;
-                    background-position: -434px -980px;
+                &.t1 {
+                    background: url("M1.png");
                 }
-                &.mons1-2 {
-                    width: 217px;
-                    height: 196px;
-                    background-position: -0px -872px;
+                &.t2 {
+                    background: url("M2.png");
                 }
-                &.mons1-3 {
-                    width: 216px;
-                    height: 196px;
-                    background-position: -434px -980px;
+                &.t3 {
+                    background: url("M3.png");
                 }
-                &.mons1-4 {
-                    width: 216px;
-                    height: 196px;
-                    background-position: -650px -784px;
+                &.t4 {
+                    background: url("M4.png");
                 }
-                &.mons1-5 {
-                    width: 216px;
-                    height: 196px;
-                    background-position: -440px -392px;
+                &.s1 {
+                    width: 194px;
+                    height: 176px;
+                    background-position: -194px -328px;
                 }
-                &.mons1-6 {
-                    width: 208px;
-                    height: 200px;
-                    background-position: -866px -390px;
+                &.s2 {
+                    width: 195px;
+                    height: 176px;
+                    background-position: -0px -152px;
                 }
-                &.mons1-7 {
-                    width: 209px;
-                    height: 190px;
-                    background-position: -656px -380px;
+                &.s3 {
+                    width: 194px;
+                    height: 176px;
+                    background-position: -194px -328px;
                 }
-                &.mons1-8 {
-                    width: 224px;
-                    height: 169px;
-                    background-position: -0px -338px;
+                &.s4 {
+                    width: 194px;
+                    height: 176px;
+                    background-position: -195px -152px;
                 }
-                &.mons2-1 {
-                    width: 216px;
-                    height: 196px;
-                    background-position: -440px -196px;
+                &.s5 {
+                    width: 194px;
+                    height: 176px;
+                    background-position: -0px -328px;
                 }
-                &.mons2-2 {
-                    width: 217px;
-                    height: 196px;
-                    background-position: -0px -676px;
+                &.s6 {
+                    width: 187px;
+                    height: 180px;
+                    background-position: -389px -0px;
                 }
-                &.mons2-3 {
-                    width: 216px;
-                    height: 196px;
-                    background-position: -440px -196px;
+                &.s7 {
+                    width: 188px;
+                    height: 171px;
+                    background-position: -388px -328px;
                 }
-                &.mons2-4 {
-                    width: 216px;
-                    height: 196px;
-                    background-position: -650px -980px;
-                }
-                &.mons2-5 {
-                    width: 216px;
-                    height: 196px;
-                    background-position: -650px -588px;
-                }
-                &.mons2-6 {
-                    width: 208px;
-                    height: 200px;
-                    background-position: -865px -190px;
-                }
-                &.mons2-7 {
-                    width: 209px;
-                    height: 190px;
-                    background-position: -656px -190px;
-                }
-                &.mons2-8 {
-                    width: 224px;
-                    height: 169px;
-                    background-position: -0px -169px;
-                }
-                &.mons3-1 {
-                    width: 216px;
-                    height: 196px;
-                    background-position: -440px -0px;
-                }
-                &.mons3-2 {
-                    width: 217px;
-                    height: 196px;
-                    background-position: -217px -676px;
-                }
-                &.mons3-3 {
-                    width: 216px;
-                    height: 196px;
-                    background-position: -440px -0px;
-                }
-                &.mons3-4 {
-                    width: 216px;
-                    height: 196px;
-                    background-position: -434px -588px;
-                }
-                &.mons3-5 {
-                    width: 216px;
-                    height: 196px;
-                    background-position: -224px -392px;
-                }
-                &.mons3-6 {
-                    width: 208px;
-                    height: 200px;
-                    background-position: -866px -590px;
-                }
-                &.mons3-7 {
-                    width: 209px;
-                    height: 190px;
-                    background-position: -656px -0px;
-                }
-                &.mons3-8 {
-                    width: 224px;
-                    height: 169px;
-                    background-position: -0px -507px;
-                }
-                &.mons4-1 {
-                    width: 216px;
-                    height: 196px;
-                    background-position: -434px -784px;
-                }
-                &.mons4-2 {
-                    width: 217px;
-                    height: 196px;
-                    background-position: -217px -872px;
-                }
-                &.mons4-3 {
-                    width: 216px;
-                    height: 196px;
-                    background-position: -434px -784px;
-                }
-                &.mons4-4 {
-                    width: 216px;
-                    height: 196px;
-                    background-position: -224px -196px;
-                }
-                &.mons4-5 {
-                    width: 216px;
-                    height: 196px;
-                    background-position: -224px -0px;
-                }
-                &.mons4-6 {
-                    width: 208px;
-                    height: 200px;
-                    background-position: -866px -790px;
-                }
-                &.mons4-7 {
-                    width: 209px;
-                    height: 190px;
-                    background-position: -865px -0px;
-                }
-                &.mons4-8 {
-                    width: 224px;
-                    height: 169px;
+                &.s8 {
+                    width: 202px;
+                    height: 152px;
                     background-position: -0px -0px;
                 }
+                //     &.mons1-1 {
+                //         width: 216px;
+                //         height: 196px;
+                //         background-position: -434px -980px;
+                //     }
+                //     &.mons1-2 {
+                //         width: 217px;
+                //         height: 196px;
+                //         background-position: -0px -872px;
+                //     }
+                //     &.mons1-3 {
+                //         width: 216px;
+                //         height: 196px;
+                //         background-position: -434px -980px;
+                //     }
+                //     &.mons1-4 {
+                //         width: 216px;
+                //         height: 196px;
+                //         background-position: -650px -784px;
+                //     }
+                //     &.mons1-5 {
+                //         width: 216px;
+                //         height: 196px;
+                //         background-position: -440px -392px;
+                //     }
+                //     &.mons1-6 {
+                //         width: 208px;
+                //         height: 200px;
+                //         background-position: -866px -390px;
+                //     }
+                //     &.mons1-7 {
+                //         width: 209px;
+                //         height: 190px;
+                //         background-position: -656px -380px;
+                //     }
+                //     &.mons1-8 {
+                //         width: 224px;
+                //         height: 169px;
+                //         background-position: -0px -338px;
+                //     }
+                //     &.mons2-1 {
+                //         width: 216px;
+                //         height: 196px;
+                //         background-position: -440px -196px;
+                //     }
+                //     &.mons2-2 {
+                //         width: 217px;
+                //         height: 196px;
+                //         background-position: -0px -676px;
+                //     }
+                //     &.mons2-3 {
+                //         width: 216px;
+                //         height: 196px;
+                //         background-position: -440px -196px;
+                //     }
+                //     &.mons2-4 {
+                //         width: 216px;
+                //         height: 196px;
+                //         background-position: -650px -980px;
+                //     }
+                //     &.mons2-5 {
+                //         width: 216px;
+                //         height: 196px;
+                //         background-position: -650px -588px;
+                //     }
+                //     &.mons2-6 {
+                //         width: 208px;
+                //         height: 200px;
+                //         background-position: -865px -190px;
+                //     }
+                //     &.mons2-7 {
+                //         width: 209px;
+                //         height: 190px;
+                //         background-position: -656px -190px;
+                //     }
+                //     &.mons2-8 {
+                //         width: 224px;
+                //         height: 169px;
+                //         background-position: -0px -169px;
+                //     }
+                //     &.mons3-1 {
+                //         width: 216px;
+                //         height: 196px;
+                //         background-position: -440px -0px;
+                //     }
+                //     &.mons3-2 {
+                //         width: 217px;
+                //         height: 196px;
+                //         background-position: -217px -676px;
+                //     }
+                //     &.mons3-3 {
+                //         width: 216px;
+                //         height: 196px;
+                //         background-position: -440px -0px;
+                //     }
+                //     &.mons3-4 {
+                //         width: 216px;
+                //         height: 196px;
+                //         background-position: -434px -588px;
+                //     }
+                //     &.mons3-5 {
+                //         width: 216px;
+                //         height: 196px;
+                //         background-position: -224px -392px;
+                //     }
+                //     &.mons3-6 {
+                //         width: 208px;
+                //         height: 200px;
+                //         background-position: -866px -590px;
+                //     }
+                //     &.mons3-7 {
+                //         width: 209px;
+                //         height: 190px;
+                //         background-position: -656px -0px;
+                //     }
+                //     &.mons3-8 {
+                //         width: 224px;
+                //         height: 169px;
+                //         background-position: -0px -507px;
+                //     }
+                //     &.mons4-1 {
+                //         width: 216px;
+                //         height: 196px;
+                //         background-position: -434px -784px;
+                //     }
+                //     &.mons4-2 {
+                //         width: 217px;
+                //         height: 196px;
+                //         background-position: -217px -872px;
+                //     }
+                //     &.mons4-3 {
+                //         width: 216px;
+                //         height: 196px;
+                //         background-position: -434px -784px;
+                //     }
+                //     &.mons4-4 {
+                //         width: 216px;
+                //         height: 196px;
+                //         background-position: -224px -196px;
+                //     }
+                //     &.mons4-5 {
+                //         width: 216px;
+                //         height: 196px;
+                //         background-position: -224px -0px;
+                //     }
+                //     &.mons4-6 {
+                //         width: 208px;
+                //         height: 200px;
+                //         background-position: -866px -790px;
+                //     }
+                //     &.mons4-7 {
+                //         width: 209px;
+                //         height: 190px;
+                //         background-position: -865px -0px;
+                //     }
+                //     &.mons4-8 {
+                //         width: 224px;
+                //         height: 169px;
+                //         background-position: -0px -0px;
+                //     }
             }
         }
         .bullet {

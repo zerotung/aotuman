@@ -1,6 +1,7 @@
 export default class Monster {
 
-    constructor() {
+    constructor(speed) {
+        this.speed = speed;
         // 生成DOM节点
         this.pic = document.createElement('div');
         // 随机生成颜色
@@ -43,7 +44,7 @@ export default class Monster {
     next() {
 
         // this.state>8时怪兽保持倒在地上图片不变
-        let state = this.type + "-" + ((this.state < 9) ? this.state : 8);
+        let state = 't' + this.type + " s" + ((this.state < 9) ? this.state : 8);
         let style = this.pic.style;
 
         if (this.stateType == 'walk') {
@@ -54,9 +55,10 @@ export default class Monster {
             return;
         }
         // 怪兽移动
-        this.left -= 10;
+        // this.left -= 10;
+        this.left -= this.speed;
         // 怪兽动作变换
-        this.pic.className = 'mons mons' + state;
+        this.pic.className = 'mons ' + state;
         // 怪兽倒下时保持不移动
         if (this.state < 9) {
             style.left = this.left + "px";
