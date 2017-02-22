@@ -128,8 +128,8 @@ export default class Aotuman {
                 // 在动画结束后改为super模式
                 self.shooting = false;
                 self.super = true;
-            }, 120);
-        }, 120)
+            }, 500);
+        }, 500)
     }
 
     /** 退出super模式 */
