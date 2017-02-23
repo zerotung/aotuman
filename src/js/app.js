@@ -8,8 +8,10 @@ document.getElementsByClassName('stage')[0].addEventListener('touchmove', functi
     e.preventDefault();
 });
 
+
 // 等待加载页的图片加载完后加载其他图片
 window.onload = function() {
+
     let preload = new Pre(
         [
             // start page
@@ -29,7 +31,6 @@ window.onload = function() {
             'static/PowerFill.png',
             'static/PowerSlot.png',
             'static/game_bg.jpg',
-            'static/X.png',
             'static/Bullet.png',
             'static/SuperLight.png',
             'static/SuperStrike.png',
