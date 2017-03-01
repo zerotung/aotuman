@@ -18,7 +18,7 @@ export default class Aotuman {
         // 这个量并没有用上
         this.startT = 0;
         // 凹凸曼的能量
-        this.power = 0;
+        this.power = 90;
         this.next();
     }
 
@@ -130,8 +130,8 @@ export default class Aotuman {
                 // 在动画结束后改为super模式
                 self.shooting = false;
                 self.super = true;
-            }, 120);
-        }, 120)
+            }, 500);
+        }, 500)
     }
 
     /** 退出super模式 */

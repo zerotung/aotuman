@@ -107,7 +107,10 @@ export default class Stage {
         // 将生成怪兽的算法作为回调函数传入play方法中
         // 预设时间间隔后调用传入函数
         this.levelObj.play(this.level, this.appendMonster.bind(this));
+        this.setMonsterWalkInterval();
+    }
 
+    setMonsterWalkInterval() {
         // 使怪兽行走的interval
         this.monsterInterval = setInterval(function() {
             this.renderMonster();
@@ -452,6 +455,7 @@ export default class Stage {
             this.score += 1;
             this.renderGameScore(this.score);
         }
+        return flag;
     }
 
     /** 爆能时的动画渲染 */
@@ -480,22 +484,33 @@ export default class Stage {
             superStrikeDOM.className = 'super-strike';
             // 奥特曼进入超级状态
             this.aotu.superMode();
-            this.renderPower(0);
-            // 为能量条添加动效类名
-            powerFillDOM.className = powerFillClassName + ' decreace';
             page.appendChild(strikeBoardDOM);
             page.appendChild(superLightDOM);
             page.removeChild(superStrikeDOM);
             // 在super time结束后将各个DOM恢复
+            let self = this;
+
+            function killAll() {
+                if (self.killFirstMonster()) {
+                    self.aotu.superStrike();
+                    setTimeout(killAll, 100);
+                } else {
+                    powerFillDOM.className = 'power-fill';
+                    page.removeChild(strikeBoardDOM);
+                    page.removeChild(superLightDOM);
+                    self.aotu.rmSuperMode(self.renderPower);
+                    self.setMonsterWalkInterval();
+                }
+            }
+            clearInterval(this.monsterInterval);
+            this.renderPower(0);
+            // 为能量条添加动效类名
+            powerFillDOM.className = powerFillClassName + ' decreace';
             setTimeout(function() {
-                powerFillDOM.className = 'power-fill';
-                page.removeChild(strikeBoardDOM);
-                page.removeChild(superLightDOM);
-                this.aotu.rmSuperMode(this.renderPower);
-            }.bind(this), SUPER_TIME);
+                killAll();
+            }.bind(this), 1500);
         }.bind(this));
         page.appendChild(superStrikeDOM);
-
         // 控制闪烁的interval
         this.powerInter = setInterval(function() {
             if (powerFillDOM.className == 'power-fill') {
