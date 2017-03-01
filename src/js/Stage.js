@@ -121,7 +121,7 @@ export default class Stage {
                 this.end();
             }
             // 根据游戏难度调整怪兽走动的速度
-        }.bind(this), 100);
+        }.bind(this), 150);
     }
 
     /** 初始化游戏页面 */
@@ -207,7 +207,7 @@ export default class Stage {
     appendMonster() {
         let monsStage = document.getElementsByClassName('mons-stage')[0];
         if (monsStage) {
-            let monster = new Monster(10 + this.level);
+            let monster = new Monster(1.5 * (10 + this.level));
             this.monsters.push(monster);
             document.getElementsByClassName('mons-stage')[0].appendChild(monster.render());
             return true;
@@ -558,15 +558,15 @@ export default class Stage {
         }, {
             "headImg": "test.jpg",
             "name": "忘了爱",
-            "score": "122"
+            "score": "422"
         }, {
             "headImg": "test.jpg",
             "name": "小贞贞",
-            "score": "13"
+            "score": "213"
         }, {
             "headImg": "test.jpg",
             "name": "Chen",
-            "score": "1"
+            "score": "113"
         }];
         this.appendRank([rank1, rank2, rank3, rank4], dataJson);
     }
