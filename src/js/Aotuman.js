@@ -18,7 +18,7 @@ export default class Aotuman {
         // 这个量并没有用上
         this.startT = 0;
         // 凹凸曼的能量
-        this.power = 0;
+        this.power = 90;
         this.next();
     }
 
@@ -99,15 +99,17 @@ export default class Aotuman {
                             this.singleBullet();
                         }
                         // 清空待发射的子弹
-                        this.bulletCache = [];
+                        // this.bulletCache = [];
+                        this.bulletCache.length = 0;
                     }.bind(this), 50);
                 } else {
                     // 如果接收到第二颗子弹立马同时打出去
                     this.bulletCache[0]();
                     this.bulletCache[1]();
-                    this.doubleBullet()
-                        // 清空待发射的子弹
-                    this.bulletCache = [];
+                    this.doubleBullet();
+                    // 清空待发射的子弹
+                    // this.bulletCache = [];
+                    this.bulletCache.length = 0;
                 }
             }
         } else {
@@ -150,12 +152,13 @@ export default class Aotuman {
      */
     powerUp(renderPower, powerFull) {
         if (this.power < POWER_TOP) {
-            if (this.power == POWER_TOP - 1) {
-                powerFull();
-            }
             this.power += 1;
-            renderPower(this.power);
         }
+        if (this.power >= POWER_TOP) {
+            powerFull();
+            this.power = 100;
+        }
+        renderPower(this.power);
     }
 
     /** 返回DOM */

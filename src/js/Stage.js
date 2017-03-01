@@ -484,9 +484,6 @@ export default class Stage {
             superStrikeDOM.className = 'super-strike';
             // 奥特曼进入超级状态
             this.aotu.superMode();
-            this.renderPower(0);
-            // 为能量条添加动效类名
-            powerFillDOM.className = powerFillClassName + ' decreace';
             page.appendChild(strikeBoardDOM);
             page.appendChild(superLightDOM);
             page.removeChild(superStrikeDOM);
@@ -506,6 +503,9 @@ export default class Stage {
                 }
             }
             clearInterval(this.monsterInterval);
+            this.renderPower(0);
+            // 为能量条添加动效类名
+            powerFillDOM.className = powerFillClassName + ' decreace';
             setTimeout(function() {
                 killAll();
             }.bind(this), 1500);

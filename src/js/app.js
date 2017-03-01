@@ -29,7 +29,6 @@ window.onload = function() {
             'static/PowerFill.png',
             'static/PowerSlot.png',
             'static/game_bg.jpg',
-            'static/X.png',
             'static/Bullet.png',
             'static/SuperLight.png',
             'static/SuperStrike.png',
