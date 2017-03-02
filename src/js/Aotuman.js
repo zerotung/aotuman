@@ -153,10 +153,12 @@ export default class Aotuman {
     powerUp(renderPower, powerFull) {
         if (this.power < POWER_TOP) {
             this.power += 1;
+            console.log(this.power);
         }
-        if (this.power >= POWER_TOP) {
+        if (this.power == POWER_TOP) {
             powerFull();
-            this.power = 100;
+            console.log('full');
+            this.power = POWER_TOP + 1;
         }
         renderPower(this.power);
     }

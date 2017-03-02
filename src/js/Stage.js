@@ -27,7 +27,7 @@ export default class Stage {
             number1 = document.createElement('div'),
             number2 = document.createElement('div'),
             percent = document.createElement('div');
-        page.className = 'page-0';
+        page.className = 'page-0 page';
         aotuman.className = 'aotuman';
         grass1.className = 'grass1';
         grass2.className = 'grass2';
@@ -77,11 +77,14 @@ export default class Stage {
         let page = document.createElement('div'),
             startIcon = document.createElement('div'),
             startBtn = document.createElement('div');
-        page.className = 'page-1';
+        page.className = 'page-1 page';
         startIcon.className = 'start-icon moveFromTop';
         startBtn.className = 'start-btn moveFromBottom';
         // 给开始游戏按钮绑定跳转到渲染游戏页面的方法
         startBtn.addEventListener('touchend', function() {
+            if (document.body.clientWidth < document.body.clientHeight) {
+                alert("请在横屏模式下进行游戏");
+            }
             this.play();
         }.bind(this));
         page.appendChild(startIcon);
@@ -142,13 +145,12 @@ export default class Stage {
             monsIcon = document.createElement('div'),
             score = document.createElement('div'),
             lvl = document.createElement('div'),
-            monsStage = document.createElement('div'),
             control = document.createElement('div'),
             control1 = document.createElement('div'),
             control2 = document.createElement('div'),
             control3 = document.createElement('div'),
             control4 = document.createElement('div');
-        page.className = "page-2";
+        page.className = "page-2 page";
         grass.className = "grass";
         gap.className = "gap";
         topbar.className = "topbar";
@@ -157,7 +159,6 @@ export default class Stage {
         monsIcon.className = "mons-icon";
         score.className = "score";
         lvl.className = "lvl";
-        monsStage.className = "mons-stage";
         control.className = "control";
         control1.className = "key control-1";
         control2.className = "key control-2";
@@ -186,7 +187,6 @@ export default class Stage {
         topbar.appendChild(score);
         topbar.appendChild(lvl);
         page.appendChild(topbar);
-        page.appendChild(monsStage);
         control.appendChild(control1);
         control.appendChild(control2);
         control.appendChild(control3);
@@ -208,11 +208,11 @@ export default class Stage {
 
     /** 在舞台中新渲染一个怪兽 */
     appendMonster() {
-        let monsStage = document.getElementsByClassName('mons-stage')[0];
-        if (monsStage) {
+        let page = document.getElementsByClassName('page-2')[0];
+        if (page) {
             let monster = new Monster(1.5 * (10 + this.level));
             this.monsters.push(monster);
-            document.getElementsByClassName('mons-stage')[0].appendChild(monster.render());
+            document.getElementsByClassName('page-2')[0].appendChild(monster.render());
             return true;
         }
         return false;
@@ -319,7 +319,7 @@ export default class Stage {
             highestScoreDOM = document.createElement('div'),
             restart = document.createElement('div'),
             share = document.createElement('div');
-        page.className = 'page-3';
+        page.className = 'page-3 page';
         grass.className = 'grass moveFromBottom';
         aotuman.className = 'aotuman';
         scoreBoard.className = 'score-board';
@@ -358,23 +358,23 @@ export default class Stage {
      */
     renderBullet(position) {
         let bullet = new Bullet(position);
-        let monsStage = document.getElementsByClassName("mons-stage")[0];
+        let page = document.getElementsByClassName("page-2")[0];
         let bulletDOM = bullet.render();
-        monsStage.appendChild(bulletDOM);
+        page.appendChild(bulletDOM);
         setTimeout(bullet.trans.bind(bullet), 10);
         setTimeout(function() {
-            monsStage.removeChild(bulletDOM);
+            page.removeChild(bulletDOM);
         }, 110);
     }
 
     /** 检查当前关卡是否结束 */
     renderMonster() {
-        let monsStage = document.getElementsByClassName("mons-stage")[0];
+        let page = document.getElementsByClassName("page-2")[0];
         this.monsters = this.monsters.filter(function(monster) {
             monster.next();
             let flag = monster.stateType == 'died';
             if (flag) {
-                monsStage.removeChild(monster.render());
+                page.removeChild(monster.render());
             }
             return !(monster.stateType == 'died');
         });
@@ -425,7 +425,8 @@ export default class Stage {
             if (this.monsters[i].stateType == 'walk' && this.monsters[i].type == num) {
                 this.monsters[i].die();
                 // 渲染子弹
-                this.renderBullet([this.monsters[i].left, this.monsters[i].bottom]);
+                console.log(this.monsters[i].position);
+                this.renderBullet(this.monsters[i].position);
                 flag = true;
                 break;
             }
@@ -446,7 +447,7 @@ export default class Stage {
         for (let i = 0; i < this.monsters.length; i++) {
             if (this.monsters[i].stateType == 'walk') {
                 this.monsters[i].die();
-                this.renderBullet([this.monsters[i].left, this.monsters[i].bottom]);
+                this.renderBullet(this.monsters[i].position);
                 flag = true;
                 break;
             }
@@ -545,7 +546,7 @@ export default class Stage {
             rank3 = document.createElement('div'),
             rank4 = document.createElement('div'),
             startBtn = document.createElement('div');
-        page.className = 'page-4';
+        page.className = 'page-4 page';
         board.className = 'board';
         aotuman.className = 'aotuman';
         grass.className = 'grass';

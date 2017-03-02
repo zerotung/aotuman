@@ -16,6 +16,10 @@ export default class Monster {
         this.init();
     }
 
+    get position() {
+        return [this.pic.offsetLeft, this.pic.offsetTop];
+    }
+
     /** 初始化怪兽状态 */
     init() {
         let state = this.type + "-" + this.state;
@@ -28,6 +32,7 @@ export default class Monster {
     }
 
     die() {
+        // console.log(this.pic.offsetTop);
         this.stateType = 'die';
         this.state = this.state < 5 ? 5 : this.state + 1;
         if (this.state > 12) {

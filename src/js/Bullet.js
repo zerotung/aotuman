@@ -9,7 +9,7 @@ export default class Bullet {
         // 获取屏幕可视区域高度
         let stageH = document.body.clientHeight;
         // 结束点(相对顶)=屏幕高度-相对底部的高度-怪兽高度+偏差
-        this.end = [endX, stageH - endY - 176 + 10];
+        this.end = [endX, endY];
         // 凹凸曼出手位置
         this.start = [280, 250];
         // 计算子弹旋转的角度
