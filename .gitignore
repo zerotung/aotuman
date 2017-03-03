@@ -2,3 +2,4 @@ node_modules
 dist
 src/imgs
 bower_components
+npm-debug.log

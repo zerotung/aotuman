@@ -3,6 +3,8 @@ import Aotuman from './Aotuman.js';
 import Bullet from './Bullet.js';
 import Level from './Level.js';
 import Cookie from './Cookie';
+import Dialog from './dialog';
+let dialog = new Dialog();
 
 export default class Stage {
 
@@ -70,6 +72,16 @@ export default class Stage {
     /** 去掉stage中所有div 在stage中渲染开始游戏页面 */
     start() {
 
+        if (document.body.clientWidth < document.body.clientHeight) {
+            dialog.confirm({
+                title: '提示',
+                content: '请在横屏模式下进行游戏',
+                confirm: {
+                    title: '确定'
+                }
+            });
+        }
+
         let stage = document.getElementsByClassName('stage')[0];
         if (stage.getElementsByTagName('div')[0]) {
             stage.removeChild(stage.getElementsByTagName('div')[0]);
@@ -82,9 +94,6 @@ export default class Stage {
         startBtn.className = 'start-btn moveFromBottom';
         // 给开始游戏按钮绑定跳转到渲染游戏页面的方法
         startBtn.addEventListener('touchend', function() {
-            if (document.body.clientWidth < document.body.clientHeight) {
-                alert("请在横屏模式下进行游戏");
-            }
             this.play();
         }.bind(this));
         page.appendChild(startIcon);
