@@ -83,16 +83,26 @@ html {
     height: 100%;
     margin: 0;
     padding: 0;
-    // overflow: hidden;
+    overflow: hidden;
     background-color: #F1F6DF;
 }
 
 .page {
     width: 1136px;
-    height: 640px;
+    height: 600px;
     top: 50%;
     transform: translateY(-50%);
     position: relative;
+}
+
+@media screen and (min-height: 640px) {
+    .page {
+        width: 1136px;
+        height: 640px;
+        top: 50%;
+        transform: translateY(-50%);
+        position: relative;
+    }
 }
 
 .page-0 {
@@ -175,7 +185,7 @@ html {
         background-image: url("StartIcon.png");
         position: absolute;
         left: #{($deviceW - $starticon-width)/2};
-        top: #{($deviceH - $starticon-height)/2-70px};
+        top: #{($deviceH - $starticon-height)/2-60px};
     }
     .start-btn {
         width: #{$startbtn-width};
@@ -183,7 +193,7 @@ html {
         background: url("StartBtn.png") no-repeat -0px -118px;
         position: absolute;
         left: #{($deviceW - $startbtn-width)/2};
-        top: #{($deviceH - $startbtn-height)/2 + $starticon-height*3/5};
+        top: #{($deviceH - $startbtn-height)/2 + 220};
         &:hover {
             background-position: 0 0;
         }

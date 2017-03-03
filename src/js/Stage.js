@@ -45,6 +45,16 @@ export default class Stage {
         loading.appendChild(percent);
         page.appendChild(loading);
         stage.appendChild(page);
+
+        if (!Cookie.prototype.getCookie('hs')) {
+            dialog.confirm({
+                title: '游戏规则',
+                content: '在怪兽越界前击倒怪兽。<br>点击下方对应颜色的按钮击倒怪兽，允许同时按两个键击倒两个怪兽。集满能量时可以开启大招！',
+                confirm: {
+                    title: '我知道啦'
+                }
+            });
+        }
     }
 
     /**
