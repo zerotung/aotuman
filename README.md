@@ -15,7 +15,7 @@
 ## 目录介绍
 
 ```
-new-year-game
+aotuman
 ├─┬ dist  # 生产文件
 │ ├── static  # 静态文件(css,img,js)
 │ └── index.html  # 入口HTML
