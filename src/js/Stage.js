@@ -564,7 +564,9 @@ export default class Stage {
             rank2 = document.createElement('div'),
             rank3 = document.createElement('div'),
             rank4 = document.createElement('div'),
-            startBtn = document.createElement('div');
+            startBtn = document.createElement('div'),
+            sharebg = document.createElement('div'),
+            sharetip = document.createElement('div');
         page.className = 'page-4 page';
         board.className = 'board';
         aotuman.className = 'aotuman';
@@ -573,18 +575,24 @@ export default class Stage {
         rank2.className = 'rank2 rank';
         rank3.className = 'rank3 rank';
         rank4.className = 'rank4 rank';
+        sharebg.className = 'sharebg';
+        sharetip.className = 'sharetip';
         startBtn.className = 'start-btn moveFromBottom';
         startBtn.addEventListener('touchend', function() {
             this.play();
         }.bind(this));
         stage.appendChild(page);
+
         page.appendChild(board);
         page.appendChild(aotuman);
         page.appendChild(grass);
+        page.appendChild(sharebg);
+        page.appendChild(sharetip);
         board.appendChild(rank1);
         board.appendChild(rank2);
         board.appendChild(rank3);
         board.appendChild(rank4);
+
         setTimeout(page.appendChild.bind(page, startBtn), 1000);
         let dataJson = [{
             "headImg": "test.jpg",
@@ -604,7 +612,12 @@ export default class Stage {
             "score": "113"
         }];
         this.appendRank([rank1, rank2, rank3, rank4], dataJson);
+        sharebg.addEventListener('touchend', function() {
+            page.removeChild(sharebg);
+            page.removeChild(sharetip);
+        }.bind(this));
     }
+    
 
     appendRank(stage, json) {
         for (let i = 0; i < 4; i++) {

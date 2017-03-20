@@ -179,6 +179,14 @@ html {
     $starticon-height: 391px;
     $startbtn-width: 298px;
     $startbtn-height: 118px;
+    .jjjj{
+        width:560px;
+        height:560px;
+        position:absolute;
+        left:0;
+        top:0;
+        background:#000;
+    }
     .start-icon {
         width: #{$starticon-width};
         height: #{$starticon-height};
@@ -926,5 +934,24 @@ html {
         position: absolute;
         right: 130px;
         top: 90px;
+    }
+    .sharebg{
+        width: 1136px;
+        height: 600px;
+        background: #000;
+        opacity: 0.5;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index:100;
+    }
+    .sharetip{
+        width: 418px;
+        height: 318px;
+        background: url("ShareTip.png") no-repeat;
+        position: absolute;
+        right: 0;
+        z-index:100;
+        top: 0;
     }
 }
